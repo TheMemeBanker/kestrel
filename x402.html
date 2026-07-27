@@ -3,26 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Methodology — Kestrel</title>
-<meta name="description" content="The Kestrel methodology: how agentic advisors construct, hold, and rebalance diversified portfolios of tokenized US securities — non-custodially, on Solana.">
-<link rel="canonical" href="https://kestrelinvest.xyz/whitepaper.html">
+<title>x402 — Kestrel for Agents</title>
+<meta name="description" content="Kestrel for agents — the x402 pay-per-use rail lets autonomous agents open, query, and rebalance a managed portfolio machine-to-machine, non-custodially, on Solana.">
+<link rel="canonical" href="https://kestrelinvest.xyz/x402.html">
 <meta name="theme-color" content="#0e9f6e" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#04140d" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kestrel">
-<meta property="og:title" content="Methodology — Kestrel">
-<meta property="og:description" content="The Kestrel methodology: how agentic advisors construct, hold, and rebalance diversified portfolios of tokenized US securities — non-custodially, on Solana.">
-<meta property="og:url" content="https://kestrelinvest.xyz/whitepaper.html">
+<meta property="og:title" content="x402 — Kestrel for Agents">
+<meta property="og:description" content="Kestrel for agents — the x402 pay-per-use rail lets autonomous agents open, query, and rebalance a managed portfolio machine-to-machine, non-custodially, on Solana.">
+<meta property="og:url" content="https://kestrelinvest.xyz/x402.html">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Methodology — Kestrel">
-<meta name="twitter:description" content="The Kestrel methodology: how agentic advisors construct, hold, and rebalance diversified portfolios of tokenized US securities — non-custodially, on Solana.">
+<meta name="twitter:title" content="x402 — Kestrel for Agents">
+<meta name="twitter:description" content="Kestrel for agents — the x402 pay-per-use rail lets autonomous agents open, query, and rebalance a managed portfolio machine-to-machine, non-custodially, on Solana.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e9f6e'/%3E%3Cg fill='%23eafff4' transform='translate(5.8,5.2) scale(0.82)'%3E%3Cpath d='M33 28 C 43 21 53 17 61 14 L 55 20 L 57 24 L 50 25 L 52 30 L 44 30 L 46 36 L 38 34 L 39 41 L 33 38 Z'/%3E%3Cpath d='M31 28 C 21 21 11 17 3 14 L 9 20 L 7 24 L 14 25 L 12 30 L 20 30 L 18 36 L 26 34 L 25 41 L 31 38 Z'/%3E%3Cpath d='M28 50 L36 50 L36 62 L33.5 58 L32 61 L30.5 58 L28 62 Z'/%3E%3Cpath d='M32 24 C 39 28 39 43 32 54 C 25 43 25 28 32 24 Z'/%3E%3Cpath d='M32 9 C 38 9 41 13 41 18 C 41 22 37 25 32 25 C 27 25 23 22 23 18 C 23 13 26 9 32 9 Z'/%3E%3C/g%3E%3C/svg%3E">
 <style>
   :root {
     --bg:#f5f8f6; --surface:#ffffff; --surface-2:#f0f5f1;
     --ink:#0e211a; --muted:#5a6f64; --line:rgba(14,33,26,.10); --card-line:rgba(14,33,26,.09);
     --accent:#0e9f6e; --accent-ink:#0a7d56; --glow:rgba(14,159,110,.14); --market:#d2604f;
-    --cash:#9fb0a6; --gold:#cba52e;
   }
   @media (prefers-color-scheme: dark) {
     :root { --bg:#070c0a; --surface:#0f1713; --surface-2:#131d17; --ink:#e9f2ec; --muted:#83988c;
@@ -47,7 +46,7 @@
   .brand b { font-size: 16px; letter-spacing: 3px; font-weight: 650; }
   .nav-links { margin-left: auto; display: flex; align-items: center; gap: 22px; }
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-family: inherit; }
-  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover, .nav-links a.on { color: var(--ink); }
   .nav-toggle { display: none; margin-left: auto; width: 40px; height: 40px; border: 1px solid var(--card-line); border-radius: 10px; background: var(--surface); cursor: pointer; padding: 0; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
   .nav-toggle span { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--ink); transition: transform .2s ease, opacity .2s ease; }
   .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -57,26 +56,37 @@
   .btn:hover { background: var(--accent); color: #04140d; box-shadow: 0 8px 24px var(--glow); }
   .btn.solid { background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 90%, #fff), var(--accent)); color: #04140d; border-color: transparent; font-weight: 650; letter-spacing: -.004em; box-shadow: 0 1px 1px rgba(0,0,0,.10), 0 8px 20px -10px var(--glow); }
   .btn.solid:hover { transform: translateY(-1px); background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 96%, #fff), var(--accent)); box-shadow: 0 2px 4px rgba(0,0,0,.12), 0 14px 30px -10px var(--glow); }
-  .btn.solid:active { transform: translateY(0); box-shadow: 0 1px 1px rgba(0,0,0,.10), 0 6px 16px -10px var(--glow); }
+  .btn.solid:active { transform: translateY(0); }
   .btn:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
   .eyebrow { font-family: ui-monospace, monospace; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 16px; }
 
-  /* doc hero */
-  .whero { padding: 58px 0 26px; border-bottom: 1px solid var(--line); }
-  .whero h1 { margin: 0; font-size: clamp(34px, 5vw, 54px); line-height: 1.04; font-weight: 800; letter-spacing: -.035em; max-width: 16ch; }
-  .whero p { margin: 20px 0 0; font-size: 18px; color: var(--muted); max-width: 62ch; }
-  .whero .meta { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 22px; font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); letter-spacing: .04em; }
-  .whero .meta b { color: var(--ink); font-weight: 650; }
+  .xhero { padding: 58px 0 26px; border-bottom: 1px solid var(--line); }
+  .xhero h1 { margin: 0; font-size: clamp(34px, 5vw, 56px); line-height: 1.03; font-weight: 800; letter-spacing: -.035em; max-width: 15ch; }
+  .xhero h1 em { font-style: normal; color: var(--accent); }
+  .xhero p { margin: 20px 0 0; font-size: 18px; color: var(--muted); max-width: 62ch; }
+  .badge402 { display: inline-flex; align-items: baseline; gap: 8px; margin-bottom: 18px; padding: 6px 12px 6px 10px; border: 1px solid var(--card-line); border-radius: 999px; background: var(--surface); font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); }
+  .badge402 b { color: var(--accent-ink); font-weight: 700; letter-spacing: .04em; }
 
-  /* doc layout */
-  .doc { display: grid; grid-template-columns: 220px 1fr; gap: 52px; padding: 40px 0 10px; align-items: start; }
+  /* flow strip */
+  .flow { margin: 30px 0 6px; }
+  .flow-in { border: 1px solid var(--card-line); border-radius: 20px; background: radial-gradient(130% 130% at 50% -20%, var(--glow), transparent 55%), var(--surface); padding: 26px 26px 22px; box-shadow: 0 34px 74px -54px var(--glow); }
+  .flow-h { font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  .flow-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .fstep { position: relative; padding: 16px 16px 16px 16px; border: 1px solid var(--card-line); border-radius: 14px; background: var(--surface); }
+  .fstep .fn { width: 26px; height: 26px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent-ink); font-family: ui-monospace, monospace; font-weight: 700; font-size: 12px; }
+  .fstep h4 { margin: 12px 0 5px; font-size: 15px; font-weight: 700; letter-spacing: -.01em; }
+  .fstep p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+  .fstep::after { content: "→"; position: absolute; right: -12px; top: 50%; transform: translateY(-50%); color: color-mix(in srgb, var(--accent) 60%, var(--muted)); font-size: 14px; z-index: 1; }
+  .fstep:last-child::after { display: none; }
+
+  /* doc */
+  .doc { display: grid; grid-template-columns: 220px 1fr; gap: 52px; padding: 42px 0 10px; align-items: start; }
   .toc { position: sticky; top: 84px; }
   .toc .tl { font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
   .toc ol { list-style: none; margin: 0; padding: 0; counter-reset: t; display: flex; flex-direction: column; gap: 2px; }
-  .toc a { display: flex; gap: 10px; padding: 7px 10px; border-radius: 8px; text-decoration: none; color: var(--muted); font-size: 13.5px; border-left: 2px solid transparent; transition: color .15s ease, background .15s ease; }
+  .toc a { display: flex; gap: 10px; padding: 7px 10px; border-radius: 8px; text-decoration: none; color: var(--muted); font-size: 13.5px; transition: color .15s ease, background .15s ease; }
   .toc a:hover { color: var(--ink); background: var(--surface); }
   .toc a::before { counter-increment: t; content: counter(t,decimal-leading-zero); font-family: ui-monospace, monospace; font-size: 11px; color: var(--accent-ink); }
-
   .article { max-width: 720px; min-width: 0; }
   .sec { padding: 14px 0 30px; border-bottom: 1px solid var(--card-line); scroll-margin-top: 84px; }
   .sec:last-of-type { border-bottom: none; }
@@ -89,27 +99,22 @@
   .sec ul li::before { content: ""; position: absolute; left: 4px; top: 10px; width: 6px; height: 6px; border-radius: 2px; background: var(--accent); }
   .sec strong { color: var(--ink); font-weight: 700; }
   .lead { font-size: 18px !important; color: var(--muted) !important; }
-
   .callout { margin: 18px 0; border: 1px solid var(--card-line); border-left: 3px solid var(--accent); border-radius: 12px; background: var(--surface); padding: 18px 20px; }
   .callout .ct { font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 6px; }
   .callout p { margin: 0; font-size: 14.5px; }
-  .formula { margin: 18px 0; border: 1px solid var(--card-line); border-radius: 12px; background: var(--surface-2); padding: 18px 20px; font-family: ui-monospace, monospace; font-size: 13.5px; color: var(--ink); overflow-x: auto; }
-  .formula .fl { color: var(--muted); font-size: 11px; letter-spacing: .04em; margin-bottom: 8px; text-transform: uppercase; }
+  .code { margin: 18px 0; border: 1px solid var(--card-line); border-radius: 12px; background: var(--surface-2); overflow: hidden; }
+  .code .ch { display: flex; align-items: center; gap: 7px; padding: 10px 14px; border-bottom: 1px solid var(--card-line); font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+  .code .ch i { width: 8px; height: 8px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 60%, var(--muted)); }
+  .code pre { margin: 0; padding: 16px 18px; overflow-x: auto; font-family: ui-monospace, monospace; font-size: 12.5px; line-height: 1.7; color: var(--ink); }
+  .code .c-key { color: var(--accent-ink); } .code .c-mut { color: var(--muted); } .code .c-str { color: var(--market); }
 
-  .tt { width: 100%; border-collapse: collapse; margin: 8px 0 16px; font-size: 14px; }
-  .tt th, .tt td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--card-line); }
-  .tt th { font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-  .tt td.n { font-family: ui-monospace, monospace; font-variant-numeric: tabular-nums; }
-  .tt .pf { font-weight: 700; }
-  .tt-wrap { overflow-x: auto; }
-
-  /* shared band + modal + footer */
   .ea-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); }
   .ea-eyebrow i { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--glow); }
-  .ea-band { margin: 40px 0 8px; }
+  .ea-band { margin: 44px 0 8px; }
   .ea-band-in { position: relative; overflow: hidden; border: 1px solid var(--card-line); border-radius: 22px; padding: 44px 40px; text-align: center; background: radial-gradient(120% 140% at 50% -30%, var(--glow), transparent 60%), var(--surface); box-shadow: 0 40px 80px -50px var(--glow); }
   .ea-band h2 { margin: 16px 0 10px; font-size: clamp(26px, 3.4vw, 38px); font-weight: 750; letter-spacing: -.02em; }
-  .ea-band p { margin: 0 auto 22px; max-width: 52ch; color: var(--muted); font-size: 16px; }
+  .ea-band p { margin: 0 auto 22px; max-width: 54ch; color: var(--muted); font-size: 16px; }
+  .ea-band .row { display: inline-flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
   .ea-overlay { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 20px; background: color-mix(in srgb, #04140d 55%, transparent); backdrop-filter: blur(6px); animation: eaFade .2s ease; }
   .ea-overlay[hidden] { display: none; }
   @keyframes eaFade { from { opacity: 0; } to { opacity: 1; } }
@@ -121,7 +126,7 @@
   .ea-sub { margin: 0 0 20px; color: var(--muted); font-size: 14px; line-height: 1.5; }
   .ea-field { display: block; margin-bottom: 14px; }
   .ea-lab { display: block; font-size: 12.5px; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
-  .ea-field input { width: 100%; padding: 12px 13px; border: 1px solid var(--card-line); border-radius: 11px; background: var(--bg); color: var(--ink); font: inherit; font-size: 15px; transition: border-color .15s ease, box-shadow .15s ease; }
+  .ea-field input { width: 100%; padding: 12px 13px; border: 1px solid var(--card-line); border-radius: 11px; background: var(--bg); color: var(--ink); font: inherit; font-size: 15px; }
   #eaWallet { font-family: ui-monospace, monospace; font-size: 13.5px; }
   .ea-field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--glow); }
   .ea-field.bad input { border-color: var(--market); }
@@ -141,8 +146,7 @@
   .foot-links a { color: var(--muted); text-decoration: none; font-size: 14px; }
   .foot-links a:hover { color: var(--ink); }
   .foot-contact { margin-left: auto; display: inline-flex; align-items: center; gap: 12px; }
-  .foot-contact .btn { padding: 8px 15px; }
-  .foot-x { display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center; border: 1px solid var(--card-line); border-radius: 9px; color: var(--ink); transition: border-color .15s ease, background .15s ease; }
+  .foot-x { display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center; border: 1px solid var(--card-line); border-radius: 9px; color: var(--ink); transition: border-color .15s ease; }
   .foot-x:hover { border-color: var(--accent); }
   .foot-x svg { width: 15px; height: 15px; }
   .foot-bottom { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
@@ -156,6 +160,8 @@
     .toc { position: static; border: 1px solid var(--card-line); border-radius: 14px; padding: 16px; background: var(--surface); }
     .toc ol { flex-flow: row wrap; gap: 6px 8px; }
     .toc a { border: 1px solid var(--card-line); border-radius: 8px; }
+    .flow-steps { grid-template-columns: 1fr 1fr; gap: 10px 22px; }
+    .fstep:nth-child(2)::after { display: none; }
   }
   @media (max-width: 680px) {
     .wrap { padding: 0 18px; }
@@ -165,7 +171,10 @@
     .nav-links.open { display: flex; }
     .nav-links a { padding: 13px 4px; font-size: 15px; border-bottom: 1px solid var(--card-line); }
     .nav-links .btn { margin-top: 12px; justify-content: center; padding: 12px; }
-    .whero { padding: 40px 0 22px; }
+    .xhero { padding: 40px 0 22px; }
+    .flow-steps { grid-template-columns: 1fr; }
+    .fstep::after { content: "↓"; right: 50%; top: auto; bottom: -13px; transform: translateX(50%); }
+    .fstep:last-child::after { display: none; }
     .ea-band-in { padding: 30px 20px; border-radius: 18px; }
     .ea-overlay { padding: 12px; align-items: flex-end; }
     .ea-modal { padding: 26px 20px 22px; border-radius: 18px 18px 16px 16px; }
@@ -195,7 +204,7 @@
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <div class="nav-links" id="navLinks">
       <a href="portfolios.html">Portfolios</a>
-      <a href="x402.html">x402</a>
+      <a href="x402.html" class="on">x402</a>
       <a href="#" id="tokenLink">$Kestrel</a>
       <button class="btn solid js-ea" type="button">Request early access</button>
     </div>
@@ -203,138 +212,128 @@
 </nav>
 
 <div class="wrap">
-  <header class="whero">
-    <p class="eyebrow">Methodology · Whitepaper</p>
-    <h1>How Kestrel's agentic advisors invest.</h1>
-    <p>Kestrel replaces the human advisor with an <em>agentic advisor</em>: an autonomous, rules-based agent that builds a diversified portfolio of tokenized US securities, holds it to a disciplined target, and rebalances it as markets move — non-custodially, around the clock, on Solana. This paper sets out the philosophy, construction, and controls behind it.</p>
-    <div class="meta"><span>Version <b>1.0</b></span><span>Asset class <b>Tokenized US equities, ETFs &amp; gold</b></span><span>Network <b>Solana</b></span><span>Custody <b>Non-custodial</b></span></div>
+  <header class="xhero">
+    <span class="badge402"><b>HTTP 402</b><span>Payment Required</span></span>
+    <h1>An advisor your <em>agents</em> can hire.</h1>
+    <p>Kestrel speaks <strong>x402</strong> — the open, HTTP-native payment rail that lets autonomous agents transact directly with services, paying per request in stablecoins. No accounts, no API keys, no human in the loop. Point an agent at Kestrel and it can open a managed portfolio, read its allocations, and keep it rebalanced — entirely machine-to-machine.</p>
   </header>
+
+  <!-- FLOW -->
+  <section class="flow">
+    <div class="flow-in">
+      <div class="flow-h">The x402 handshake</div>
+      <div class="flow-steps">
+        <div class="fstep"><span class="fn">1</span><h4>Agent requests</h4><p>Your agent calls a Kestrel endpoint — open a portfolio, fetch NAV, or check for drift.</p></div>
+        <div class="fstep"><span class="fn">2</span><h4>402 returned</h4><p>Kestrel replies <b>402 Payment Required</b> with the asset, amount, and recipient for that action.</p></div>
+        <div class="fstep"><span class="fn">3</span><h4>Agent pays</h4><p>The agent settles on-chain in stablecoins and attaches the payment proof — no signup, no card.</p></div>
+        <div class="fstep"><span class="fn">4</span><h4>Access granted</h4><p>Kestrel verifies and fulfils the request. The agent now operates within its mandate.</p></div>
+      </div>
+    </div>
+  </section>
 
   <div class="doc">
     <aside class="toc">
       <div class="tl">Contents</div>
       <ol>
-        <li><a href="#philosophy">Philosophy</a></li>
-        <li><a href="#advisor">The agentic advisor</a></li>
-        <li><a href="#universe">Asset universe</a></li>
-        <li><a href="#construction">Portfolio construction</a></li>
-        <li><a href="#rebalancing">Rebalancing</a></li>
-        <li><a href="#risk">Risk management</a></li>
-        <li><a href="#custody">Custody &amp; security</a></li>
-        <li><a href="#x402access">Agent access (x402)</a></li>
-        <li><a href="#disclosures">Disclosures</a></li>
+        <li><a href="#what">What is x402</a></li>
+        <li><a href="#why">Why it fits Kestrel</a></li>
+        <li><a href="#add">Add an agent</a></li>
+        <li><a href="#can">What agents can do</a></li>
+        <li><a href="#guardrails">Guardrails</a></li>
+        <li><a href="#security">Security</a></li>
       </ol>
     </aside>
 
     <article class="article">
-      <section class="sec" id="philosophy">
-        <h2><span class="k">01</span>Philosophy</h2>
-        <p class="lead">Great investing is mostly discipline: own a sensible mix, keep costs low, and don't let emotion move you off plan. The hard part is doing it consistently, forever.</p>
-        <p>Most investors underperform their own portfolios — not because they pick badly, but because they drift: they chase what's rising, sell what's falling, and let winners balloon until a single position dictates their fate. A disciplined process fixes this, but discipline is exhausting to maintain by hand.</p>
-        <p>Kestrel encodes that discipline into software. You choose a risk level; from there, an autonomous agent does what a good advisor would — construct a diversified target, hold to it, and rebalance methodically — without fatigue, fees that compound against you, or the temptation to time the market.</p>
+      <section class="sec" id="what">
+        <h2><span class="k">01</span>What is x402</h2>
+        <p class="lead">x402 revives a status code the web reserved decades ago but never used — <strong>HTTP 402, "Payment Required"</strong> — and turns it into a working payment layer for software.</p>
+        <p>When an agent requests something that costs money, the service answers <strong>402</strong> with a small, machine-readable description of what to pay: which asset, how much, and where. The agent pays on-chain, retries with proof of payment, and the service delivers. The whole exchange happens in two round-trips, in code, with no human, no account creation, and no stored card.</p>
+        <p>For autonomous agents this is the missing piece. It lets software <strong>pay for exactly what it uses, the instant it uses it</strong> — metered, permissionless, and settled in stablecoins — the way APIs should have worked in a world where the customer is a machine.</p>
       </section>
 
-      <section class="sec" id="advisor">
-        <h2><span class="k">02</span>The agentic advisor</h2>
-        <p>An <strong>agentic advisor</strong> is an autonomous agent that manages a portfolio on your behalf under a fixed, transparent mandate. It is not a chatbot and not a signal service — it is a persistent process with a narrow, auditable job:</p>
+      <section class="sec" id="why">
+        <h2><span class="k">02</span>Why it fits Kestrel</h2>
+        <p>Kestrel is already agentic: each portfolio is run by an autonomous advisor. x402 extends that from the inside out — it lets <em>other</em> agents become clients of the advisor.</p>
+        <p>A treasury agent managing idle stablecoins, a fund's execution bot, or a personal AI assistant can allocate capital into a professionally-constructed, self-rebalancing portfolio without a human ever opening an app. The agent pays per action; Kestrel does the disciplined work — target allocations, drift-band rebalancing, non-custodial execution — and reports back in a format another machine can act on.</p>
+        <div class="callout"><div class="ct">The thesis</div><p>Agentic capital needs an agentic advisor. x402 is the rail that connects them — pay-per-use access to a rules-based portfolio manager, priced by the request and settled on-chain.</p></div>
+      </section>
+
+      <section class="sec" id="add">
+        <h2><span class="k">03</span>Adding an x402 agent</h2>
+        <p>Onboarding an agent takes no keys to provision and no account to create. Your agent needs a funded wallet and the ability to make HTTP requests — the payment flow does the rest.</p>
         <ul>
-          <li><strong>Observe</strong> — continuously price every holding from cross-sourced market data.</li>
-          <li><strong>Compare</strong> — measure each position against its target weight.</li>
-          <li><strong>Act</strong> — when drift exceeds a set band, execute the trades that return the portfolio to target.</li>
+          <li><strong>Point &amp; call.</strong> Direct your agent at the Kestrel action endpoint (open, fund, query, or rebalance-check).</li>
+          <li><strong>Handle the 402.</strong> Read the payment requirements returned with the <b>402</b> response.</li>
+          <li><strong>Pay &amp; retry.</strong> Settle on-chain and re-send the request with the payment proof attached.</li>
+          <li><strong>Operate.</strong> Kestrel verifies and executes within the agent's granted, non-custodial mandate.</li>
         </ul>
-        <p>Because the mandate is rules-based, its behaviour is predictable and reviewable. The advisor can only rebalance among your approved holdings; it has no discretion to speculate, add leverage, or move assets out of your control. Every action maps to a rule you can read in this paper.</p>
-        <div class="callout"><div class="ct">In plain terms</div><p>A tireless, rules-bound portfolio manager that watches your mix 24/7 and quietly keeps it on target — and can never do anything else.</p></div>
-      </section>
+        <div class="code">
+          <div class="ch"><i></i>Illustrative — the 402 handshake</div>
+          <pre><span class="c-mut"># 1. agent asks to open a portfolio</span>
+<span class="c-key">POST</span> /v1/portfolio/open
 
-      <section class="sec" id="universe">
-        <h2><span class="k">03</span>Asset universe</h2>
-        <p>Kestrel invests exclusively in <strong>tokenized real-world securities</strong> issued via Backpack Securities — 1:1 tokenized US stocks, ETFs, and gold that trade 24/7 on Solana and settle in USD terms. This gives round-the-clock, programmatic access to blue-chip US markets with on-chain settlement.</p>
-        <p>The universe spans four building blocks, combined in different proportions across the four portfolios:</p>
-        <ul>
-          <li><strong>Broad-market ETFs</strong> (e.g. S&amp;P 500, Nasdaq-100, dividend) — low-cost diversified cores.</li>
-          <li><strong>Blue-chip equities</strong> (e.g. Apple, Microsoft, Nvidia, Berkshire) — quality large-caps.</li>
-          <li><strong>Growth &amp; frontier names</strong> (e.g. SpaceX, Palantir, Robinhood) — higher-return, higher-volatility exposure.</li>
-          <li><strong>Ballast</strong> — gold as a hedge and Treasuries / cash for stability.</li>
-        </ul>
-        <p>Every candidate must clear liquidity and integrity screens before it can enter a portfolio; names that fail screening are excluded, and the mix is capped so no single position can dominate.</p>
-      </section>
+<span class="c-mut"># 2. Kestrel: payment required</span>
+<span class="c-key">HTTP/1.1 402</span> Payment Required
+{ <span class="c-key">"asset"</span>: <span class="c-str">"USDC"</span>, <span class="c-key">"amount"</span>: <span class="c-str">"5.00"</span>,
+  <span class="c-key">"pay_to"</span>: <span class="c-str">"kestrel…9dPq"</span>, <span class="c-key">"nonce"</span>: <span class="c-str">"…"</span> }
 
-      <section class="sec" id="construction">
-        <h2><span class="k">04</span>Portfolio construction</h2>
-        <p>Kestrel offers four risk-laddered portfolios. Each has a fixed <strong>target allocation</strong> across stocks, gold, and cash — the anchor the advisor holds you to. Risk rises as the stock share rises and the cash ballast falls.</p>
-        <div class="tt-wrap">
-        <table class="tt">
-          <thead><tr><th>Portfolio</th><th>Risk</th><th>Stocks</th><th>Gold</th><th>Cash</th></tr></thead>
-          <tbody>
-            <tr><td class="pf">Roost</td><td>Conservative</td><td class="n">50%</td><td class="n">—</td><td class="n">50%</td></tr>
-            <tr><td class="pf">Perch</td><td>Moderate</td><td class="n">70%</td><td class="n">5%</td><td class="n">25%</td></tr>
-            <tr><td class="pf">Soar</td><td>Growth</td><td class="n">85%</td><td class="n">5%</td><td class="n">10%</td></tr>
-            <tr><td class="pf">Apex</td><td>Aggressive</td><td class="n">90%</td><td class="n">10%</td><td class="n">—</td></tr>
-          </tbody>
-        </table>
+<span class="c-mut"># 3. agent pays on-chain, retries with proof</span>
+<span class="c-key">POST</span> /v1/portfolio/open
+<span class="c-key">X-Payment:</span> &lt;settled-tx-signature&gt;
+
+<span class="c-mut"># 4. access granted</span>
+<span class="c-key">HTTP/1.1 200</span> OK
+{ <span class="c-key">"portfolio"</span>: <span class="c-str">"Soar"</span>, <span class="c-key">"status"</span>: <span class="c-str">"active"</span> }</pre>
         </div>
-        <p>Within the stock sleeve, weights are <strong>capped</strong> so a single pumped name can't come to define the portfolio, and diversified across sectors and factors. Gold is added from the Moderate tier upward as a hedge that tends to hold up when equities fall. Full holdings for each portfolio are published on the <a href="portfolios.html">Portfolios</a> page.</p>
+        <p class="lead" style="font-size:14px !important">Endpoint names and amounts above are illustrative — the live specification is shared with approved early-access partners.</p>
       </section>
 
-      <section class="sec" id="rebalancing">
-        <h2><span class="k">05</span>Rebalancing</h2>
-        <p>Rebalancing is the engine of the whole system. Kestrel uses a <strong>drift-band</strong> method rather than a fixed calendar: it rebalances only when a holding strays more than a set band from its target — roughly three percentage points — not on an arbitrary schedule.</p>
-        <h3>Why bands beat the calendar</h3>
-        <p>Calendar rebalancing trades whether or not it's needed — churning in quiet markets and often waiting too long in violent ones. Drift-bands are <strong>volatility-driven</strong>: they do nothing when markets are calm and act precisely when markets move enough to matter. Fewer needless trades, and a response that scales with what the market is actually doing.</p>
-        <div class="formula">
-          <div class="fl">Rebalance trigger</div>
-          rebalance when&nbsp; max<sub>i</sub> | w<sub>i</sub> − target<sub>i</sub> |&nbsp; ≥&nbsp; band (≈ 0.03)
-        </div>
-        <h3>The rebalancing premium</h3>
-        <p>Systematically trimming what has run ahead and topping up what has fallen behind is a disciplined "sell-high, buy-low." Across choppy, trending, and crashing markets, this tends to add return versus simply holding the same basket untouched — and, just as importantly, keeps your risk from quietly creeping above the level you chose as winners balloon.</p>
-        <div class="callout"><div class="ct">Illustration</div><p>If growth names rally and push your stock share from 60% to 73%, your portfolio is now riskier than you signed up for. The advisor trims the excess back to 60% and restores the gold and cash — resetting both your risk and your discipline.</p></div>
-      </section>
-
-      <section class="sec" id="risk">
-        <h2><span class="k">06</span>Risk management</h2>
-        <p>Risk is controlled at every layer of construction, not bolted on afterward:</p>
+      <section class="sec" id="can">
+        <h2><span class="k">04</span>What agents can do</h2>
+        <p>An x402 agent operates inside a fixed, transparent mandate. It can:</p>
         <ul>
-          <li><strong>Diversification</strong> — every portfolio spreads across many names, sectors, and asset classes.</li>
-          <li><strong>Position caps</strong> — single-name weights are limited so no one holding can sink the portfolio.</li>
-          <li><strong>Ballast &amp; hedges</strong> — Treasuries/cash and gold cushion drawdowns and dampen volatility.</li>
-          <li><strong>Drift control</strong> — rebalancing prevents risk from silently drifting above your chosen level.</li>
-          <li><strong>Screening</strong> — the inclusion screen fails closed: when in doubt, a name stays out.</li>
+          <li><strong>Open &amp; fund</strong> a managed portfolio at a chosen risk level.</li>
+          <li><strong>Read state</strong> — current allocations, net asset value, and drift versus target.</li>
+          <li><strong>Trigger a rebalance-check</strong> — Kestrel evaluates drift and, if a holding is past its band, restores the target.</li>
+          <li><strong>Subscribe</strong> to ongoing advisory so the portfolio stays managed without further prompting.</li>
         </ul>
-        <p>Kestrel does not use leverage and does not short. Portfolios are long-only baskets of real, tokenized securities.</p>
+        <p>What it <strong>cannot</strong> do is exactly what a good advisor never would: it cannot speculate outside the mandate, add leverage, or move assets anywhere but between approved holdings.</p>
       </section>
 
-      <section class="sec" id="custody">
-        <h2><span class="k">07</span>Custody &amp; security</h2>
-        <p>Kestrel is <strong>non-custodial by design</strong>. Your assets remain in a wallet you control. The advisor is granted a narrow, program-enforced authority that lets it rebalance <em>between your approved holdings only</em> — it can never transfer assets to itself or to any third party.</p>
+      <section class="sec" id="guardrails">
+        <h2><span class="k">05</span>Guardrails</h2>
+        <p>Agent access inherits every discipline of the core methodology — nothing is relaxed because the client is a machine:</p>
         <ul>
-          <li><strong>You hold the keys.</strong> Kestrel never takes custody and never asks for your seed phrase.</li>
-          <li><strong>Rebalance-only authority.</strong> The delegated permission is limited to whitelisted-asset swaps; withdrawals to the advisor are impossible by construction.</li>
-          <li><strong>Revocable.</strong> You can withdraw the advisor's authority at any time.</li>
-          <li><strong>Transparent execution.</strong> Every rebalance is an on-chain transaction you can audit.</li>
+          <li><strong>Rebalance-only.</strong> The advisor's authority is limited to whitelisted-asset swaps; withdrawals to the advisor are impossible by construction.</li>
+          <li><strong>Capped &amp; screened.</strong> Single-name weights are capped and the universe is screened before anything can be bought.</li>
+          <li><strong>Metered by design.</strong> Each action is a discrete, priced request — no open-ended access, no standing spend.</li>
+          <li><strong>Auditable.</strong> Every payment and every rebalance is an on-chain transaction the owner can verify.</li>
         </ul>
-        <p>This invariant — that the agent can act on your portfolio but never abscond with it — is the single most important property of the system, and the one we hold to the highest standard.</p>
       </section>
 
-      <section class="sec" id="x402access">
-        <h2><span class="k">08</span>Agent access (x402)</h2>
-        <p>Kestrel is designed to be operated not only by people but by <strong>autonomous agents</strong>. It speaks <strong>x402</strong> — an HTTP-native payment rail that lets software pay for a service per request, in stablecoins, with no account and no API key.</p>
-        <p>When an agent requests a paid action, Kestrel responds with <strong>HTTP 402, "Payment Required,"</strong> describing the asset, amount, and recipient. The agent settles on-chain, retries with proof of payment, and Kestrel fulfils the request. This turns the advisor into infrastructure other agents can hire — a treasury bot or autonomous fund can open a managed portfolio, read allocations and NAV, and trigger a rebalance-check, entirely machine-to-machine.</p>
-        <p>Agent access inherits every guardrail of the core methodology: the granted authority is <strong>rebalance-only</strong> and non-custodial, weights stay capped, the universe stays screened, and each action is a discrete, metered, on-chain-auditable request. Full details are on the <a href="x402.html">x402</a> page.</p>
-      </section>
-
-      <section class="sec" id="disclosures">
-        <h2><span class="k">09</span>Disclosures</h2>
-        <p>This document is for information only. It is not investment advice, an offer, or a solicitation, and nothing here is a guarantee of future results. Figures and scenarios shown across the site are illustrative simulations, not forecasts. Tokenized securities carry market risk and additional risks specific to on-chain assets. Consider your own circumstances and seek professional advice before investing.</p>
+      <section class="sec" id="security">
+        <h2><span class="k">06</span>Security</h2>
+        <p>x402 access is built to be safe for a counterparty you can't see — because the counterparty is code.</p>
+        <ul>
+          <li><strong>Non-custodial.</strong> Funds stay in a wallet the owner controls; Kestrel never takes custody.</li>
+          <li><strong>Verified settlement.</strong> Every request is fulfilled only against a confirmed on-chain payment, with replay and spoof protection.</li>
+          <li><strong>Least privilege.</strong> An agent holds exactly the rebalance-only mandate it was granted — and no more — and it can be revoked at any time.</li>
+        </ul>
+        <p>The result is a payment surface an autonomous agent can use confidently, and one that can never be turned against the assets it manages.</p>
       </section>
     </article>
   </div>
 
   <section class="ea-band">
     <div class="ea-band-in">
-      <span class="ea-eyebrow"><i></i>Now onboarding · Limited first cohort</span>
-      <h2>Put an advisor on your portfolio.</h2>
-      <p>Kestrel is opening to a small group of early investors. Reserve your place with your wallet and email — every request is reviewed, and we'll reach out as access opens.</p>
-      <button class="btn solid js-ea" type="button">Request early access</button>
+      <span class="ea-eyebrow"><i></i>For builders &amp; autonomous funds</span>
+      <h2>Bring your agent to Kestrel.</h2>
+      <p>We're granting x402 access to a first group of agent builders and autonomous treasuries. Request early access, or reach out to talk integration.</p>
+      <div class="row">
+        <button class="btn solid js-ea" type="button">Request early access</button>
+        <a class="btn" href="contact.html">Talk to us</a>
+      </div>
     </div>
   </section>
 
@@ -349,7 +348,7 @@
       </span>
     </div>
     <div class="foot-bottom">
-      <span class="cap">Illustrative and informational — not investment advice or a forecast. Tokenized US securities via Backpack Securities, traded 24/7 on Solana.</span>
+      <span class="cap">Illustrative and informational — not investment advice or a forecast. Endpoint details are illustrative and shared with approved partners. Tokenized US securities via Backpack Securities, traded 24/7 on Solana.</span>
       <span class="foot-meta"><a class="foot-dom" href="index.html">kestrelinvest.xyz</a><span class="bpbadge"><svg class="bp"><use href="#bp"/></svg>Powered by Backpack Securities</span></span>
     </div>
   </footer>
@@ -414,11 +413,6 @@
   $("eaDoneClose").addEventListener("click", closeEA);
   overlay.addEventListener("click", function(e){ if(e.target===overlay) closeEA(); });
   document.addEventListener("keydown", function(e){ if(e.key==="Escape" && !overlay.hidden) closeEA(); });
-  function sendEA(w,em){
-    try{ localStorage.setItem("kestrel_ea", JSON.stringify({wallet:w,email:em})); }catch(_){}
-    if(!EA_ENDPOINT) return Promise.resolve();
-    return fetch(EA_ENDPOINT,{ method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify({wallet:w,email:em,source:"kestrelinvest.xyz/whitepaper"}) }).then(function(r){ if(!r.ok) throw new Error("x"); });
-  }
   eaForm.addEventListener("submit", function(e){
     e.preventDefault();
     var w=eaWallet.value.trim(), em=eaEmail.value.trim(), ok=true;
@@ -426,8 +420,10 @@
     if(!emailRe.test(em)){ setErr(eaEmail,eaEErr,"Enter a valid email address."); ok=false; } else clrErr(eaEmail,eaEErr);
     if(!ok) return;
     eaSubmit.disabled=true; eaSubmit.textContent="Submitting…";
-    sendEA(w,em).then(function(){ formView.hidden=true; doneView.hidden=false; setTimeout(function(){ $("eaDoneClose").focus(); },40); })
-      .catch(function(){ eaSubmit.disabled=false; eaSubmit.textContent="Request early access"; setErr(eaEmail,eaEErr,"Something went wrong — please try again."); });
+    try{ localStorage.setItem("kestrel_ea", JSON.stringify({wallet:w,email:em})); }catch(_){}
+    var p = EA_ENDPOINT ? fetch(EA_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({wallet:w,email:em,source:"kestrelinvest.xyz/x402"})}).then(function(r){ if(!r.ok) throw new Error("x"); }) : Promise.resolve();
+    p.then(function(){ formView.hidden=true; doneView.hidden=false; setTimeout(function(){ $("eaDoneClose").focus(); },40); })
+     .catch(function(){ eaSubmit.disabled=false; eaSubmit.textContent="Request early access"; setErr(eaEmail,eaEErr,"Something went wrong — please try again."); });
   });
 })();
 </script>
