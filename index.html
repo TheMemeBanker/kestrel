@@ -93,8 +93,8 @@
 
   /* engine + circles */
   .stagegrid { display: grid; grid-template-columns: 208px 1.5fr 244px; gap: 18px; align-items: stretch; }
-  @media (max-width: 1000px) { .stagegrid { grid-template-columns: 1fr; } .panel { order: 1; } .rail { order: 2; } .stocks { order: 3; } }
-  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; } .hero-img { order: -1; } }
+  @media (max-width: 1000px) { .stagegrid { grid-template-columns: 1fr; gap: 14px; } .panel { order: 1; } .rail { order: 2; } .stocks { order: 3; } .pcard { flex: none; } .slist { flex: none; max-height: none; overflow: visible; } }
+  @media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 30px; padding: 46px 0 40px; } .hero-img { order: -1; aspect-ratio: 16 / 10; } }
 
   /* tokenized stocks column */
   .stocks { display: flex; flex-direction: column; min-height: 0; gap: 10px; }
@@ -209,6 +209,42 @@
   .bpbadge .bp { width: 15px; height: 15px; color: var(--accent-ink); flex: none; }
   footer .cap { color: var(--muted); font-size: 11.5px; max-width: 56ch; }
 
+  /* ---- mobile polish ---- */
+  @media (max-width: 680px) {
+    .wrap { padding: 0 18px; }
+    .nav-in { padding: 12px 18px; gap: 10px; }
+    .nav-links { gap: 14px; }
+    .nav-links a:not(.btn) { display: none; }           /* keep nav to brand + one CTA */
+    .btn { padding: 8px 15px; }
+    .brand b { letter-spacing: 2.5px; }
+
+    .hero { padding: 34px 0 30px; gap: 26px; }
+    h1 { font-size: clamp(32px, 8.6vw, 44px); letter-spacing: -.03em; }
+    .hero p.lede { font-size: 16px; margin: 16px 0 22px; max-width: none; }
+    .cta-row { gap: 10px; } .cta-row .btn { flex: 1; justify-content: center; min-width: 140px; }
+    .chips { gap: 8px 16px; margin-top: 22px; }
+
+    .sec { padding: 26px 0 22px; }
+    .sec-head { margin-bottom: 20px; }
+    .sec-head p { font-size: 15px; }
+
+    .panel { padding: 18px 15px; border-radius: 16px; }
+    .phead h3 { font-size: 17px; }
+    .phead .pnote { display: none; }                     /* drop the redundant right-side note */
+    .stage { gap: 14px; margin-top: 12px; }
+    .vbox .vnum { font-size: clamp(30px, 9vw, 38px); }
+    .clegend { gap: 16px; font-size: 11.5px; }
+    .controls { gap: 11px; }
+
+    .pcard { gap: 12px; padding: 12px; border-radius: 14px; }
+    .mini { width: 48px; height: 48px; }
+    .pc-top b { font-size: 15px; }
+    .pc-desc { font-size: 11.5px; }
+
+    .feat { padding: 18px; border-radius: 14px; }
+    footer { padding: 22px 0 46px; gap: 14px; }
+    footer .cap { font-size: 11px; }
+  }
   @media (prefers-reduced-motion: reduce) { .halo,.abar.pulse,.live i,.rise { animation: none !important; } .abar > span { transition: none; } .rise { opacity:1; transform:none; } html { scroll-behavior: auto; } }
 </style>
 
