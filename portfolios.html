@@ -57,8 +57,10 @@
   .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
   .btn { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; padding: 9px 17px; border-radius: 10px; font-size: 14px; font-weight: 600; font-family: inherit; text-decoration: none; cursor: pointer; transition: all .16s ease; }
   .btn:hover { background: var(--accent); color: #04140d; box-shadow: 0 8px 24px var(--glow); }
-  .btn.solid { background: var(--accent); color: #04140d; }
-  .btn.solid:hover { transform: translateY(-1px); }
+  .btn.solid { background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 90%, #fff), var(--accent)); color: #04140d; border-color: transparent; font-weight: 650; letter-spacing: -.004em; box-shadow: 0 1px 1px rgba(0,0,0,.10), 0 8px 20px -10px var(--glow); }
+  .btn.solid:hover { transform: translateY(-1px); background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 96%, #fff), var(--accent)); box-shadow: 0 2px 4px rgba(0,0,0,.12), 0 14px 30px -10px var(--glow); }
+  .btn.solid:active { transform: translateY(0); box-shadow: 0 1px 1px rgba(0,0,0,.10), 0 6px 16px -10px var(--glow); }
+  .btn:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
 
   /* hero */
   .phero { padding: 62px 0 34px; max-width: 760px; }
@@ -125,7 +127,10 @@
   .pf-holds .hh { font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding: 0 4px 8px; display: flex; }
   .pf-holds .hh span:last-child { margin-left: auto; }
   .hrow { display: flex; align-items: center; gap: 12px; padding: 8px 4px; border-top: 1px solid var(--card-line); }
-  .hlogo { width: 30px; height: 30px; border-radius: 8px; flex: none; display: flex; align-items: center; justify-content: center; color: #fff; font-family: ui-monospace, monospace; font-weight: 700; font-size: 11px; box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 0 0 1px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.18); }
+  .hlogo { width: 32px; height: 32px; border-radius: 8px; flex: none; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #fff; color: #fff; font-family: ui-monospace, monospace; font-weight: 700; font-size: 11px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.12); }
+  .hlogo img { width: 100%; height: 100%; object-fit: contain; padding: 5px; display: block; }
+  .hlogo.fallback { background: linear-gradient(150deg, color-mix(in srgb, var(--bc) 78%, #fff), var(--bc)); box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 0 0 1px rgba(0,0,0,.10), 0 1px 2px rgba(0,0,0,.18); }
+  .hlogo.fallback::after { content: attr(data-m); }
   .hrow .hnm { display: flex; flex-direction: column; gap: 0; min-width: 0; width: 128px; }
   .hrow .hnm b { font-family: ui-monospace, monospace; font-size: 12.5px; font-weight: 650; }
   .hrow .hnm span { font-size: 11px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -242,7 +247,6 @@
     <a class="brand" href="index.html"><svg class="logo"><use href="#kestrel"/></svg><b>KESTREL</b></a>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <div class="nav-links" id="navLinks">
-      <a href="index.html#how">How it works</a>
       <a href="portfolios.html" class="on">Portfolios</a>
       <a href="#" id="tokenLink">$Kestrel</a>
       <button class="btn solid js-ea" type="button">Request early access</button>
@@ -375,6 +379,12 @@
     JPM:['#005eb8','J'], AMZN:['#e8830c','a'], NVDA:['#5c8a00','N'], META:['#0866ff','∞'],
     HOOD:['#00b34a','H'], PLTR:['#14161a','P'], TSLA:['#e82127','T'], MU:['#0a4d8c','MU'],
     SPCX:['#14161a','X'], MSTR:['#f7931a','₿'], COIN:['#0052ff','C'] };
+  var DOMAIN={ SGOV:'ishares.com', GLD:'spdrgoldshares.com', SPY:'ssga.com', QQQ:'invesco.com',
+    SCHD:'schwab.com', AAPL:'apple.com', MSFT:'microsoft.com', 'BRK.B':'berkshirehathaway.com',
+    JPM:'jpmorganchase.com', AMZN:'amazon.com', NVDA:'nvidia.com', META:'meta.com',
+    HOOD:'robinhood.com', PLTR:'palantir.com', TSLA:'tesla.com', MU:'micron.com',
+    SPCX:'spacex.com', MSTR:'strategy.com', COIN:'coinbase.com' };
+  function logoUrl(dom){ return "https://www.google.com/s2/favicons?domain="+dom+"&sz=64"; }
   var PORT=[
     {k:"Roost", tier:"Conservative", tc:"r1", thesis:"Safety first — half in blue-chip stocks, half in cash & Treasuries.",
      holds:[["SPY",25],["SCHD",15],["AAPL",10],["SGOV",50]]},
@@ -398,8 +408,10 @@
       stops.push("var(--surface) "+acc+"% "+(acc+0.6)+"%"); stops.push(c+" "+(acc+0.6)+"% "+(acc+a-0.6)+"%"); acc+=a; });
     var conic="conic-gradient("+stops.join(",")+")";
     var maxw=Math.max.apply(null, p.holds.map(function(h){return h[1];}));
-    var rows=p.holds.map(function(h){ var k=h[0], c=(BRAND[k]||['#6b7787','?']);
-      return '<div class="hrow"><span class="hlogo" style="background:'+bg(c[0])+'">'+c[1]+'</span>'
+    var rows=p.holds.map(function(h){ var k=h[0], c=(BRAND[k]||['#6b7787','?']), dom=DOMAIN[k];
+      var tile='<span class="hlogo'+(dom?'':' fallback')+'" data-m="'+c[1]+'" style="--bc:'+c[0]+'">'
+        +(dom?'<img src="'+logoUrl(dom)+'" alt="" width="64" height="64" loading="lazy" referrerpolicy="no-referrer">':'')+'</span>';
+      return '<div class="hrow">'+tile
         +'<span class="hnm"><b>'+k+'</b><span>'+NAME[k]+'</span></span>'
         +'<span class="hbar"><i style="width:'+(h[1]/maxw*100)+'%;background:'+c[0]+'"></i></span>'
         +'<span class="hw">'+h[1]+'%</span></div>';
@@ -418,6 +430,12 @@
         +'<div class="pf-holds"><div class="hh"><span>'+p.holds.length+' holdings</span><span>Target</span></div>'+rows+'</div>'
       +'</div></section>';
   }).join("");
+  // logos fall back to the branded tile when they can't load (offline / CSP sandbox)
+  Array.prototype.forEach.call(document.querySelectorAll("#plist .hlogo img"), function(img){
+    function fb(){ var t=img.parentNode; if(t){ t.classList.add("fallback"); } img.remove(); }
+    img.addEventListener("error", fb);
+    if(img.complete && img.naturalWidth===0) fb();
+  });
 
   // ---- rebalance demonstration ----
   var SEG=[

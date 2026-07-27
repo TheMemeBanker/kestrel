@@ -55,8 +55,10 @@
   .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
   .btn { display: inline-flex; align-items: center; gap: 7px; border: 1px solid var(--accent); color: var(--accent-ink); background: transparent; padding: 9px 17px; border-radius: 10px; font-size: 14px; font-weight: 600; font-family: inherit; text-decoration: none; cursor: pointer; transition: all .16s ease; }
   .btn:hover { background: var(--accent); color: #04140d; box-shadow: 0 8px 24px var(--glow); }
-  .btn.solid { background: var(--accent); color: #04140d; }
-  .btn.solid:hover { transform: translateY(-1px); }
+  .btn.solid { background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 90%, #fff), var(--accent)); color: #04140d; border-color: transparent; font-weight: 650; letter-spacing: -.004em; box-shadow: 0 1px 1px rgba(0,0,0,.10), 0 8px 20px -10px var(--glow); }
+  .btn.solid:hover { transform: translateY(-1px); background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 96%, #fff), var(--accent)); box-shadow: 0 2px 4px rgba(0,0,0,.12), 0 14px 30px -10px var(--glow); }
+  .btn.solid:active { transform: translateY(0); box-shadow: 0 1px 1px rgba(0,0,0,.10), 0 6px 16px -10px var(--glow); }
+  .btn:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 2px; }
   .eyebrow { font-family: ui-monospace, monospace; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent-ink); margin: 0 0 16px; }
 
   /* doc hero */
@@ -192,7 +194,6 @@
     <a class="brand" href="index.html"><svg class="logo"><use href="#kestrel"/></svg><b>KESTREL</b></a>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <div class="nav-links" id="navLinks">
-      <a href="index.html#how">How it works</a>
       <a href="portfolios.html">Portfolios</a>
       <a href="#" id="tokenLink">$Kestrel</a>
       <button class="btn solid js-ea" type="button">Request early access</button>
