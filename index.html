@@ -769,7 +769,7 @@
   navToggle.addEventListener("click", function(){
     var open=navLinks.classList.toggle("open"); navToggle.setAttribute("aria-expanded", open?"true":"false");
   });
-  Array.prototype.forEach.call(navLinks.querySelectorAll("a"), function(a){ a.addEventListener("click", closeNav); });
+  Array.prototype.forEach.call(navLinks.querySelectorAll("a"), function(a){ a.addEventListener("click", function(e){ if(a.getAttribute("href")==="#"){ e.preventDefault(); } closeNav(); }); });
 
   /* ---------- early-access waitlist ---------- */
   var EA_ENDPOINT=""; // TODO: set to the form endpoint once chosen (Formspree/etc.) to capture signups server-side

@@ -303,7 +303,7 @@
   var navToggle=$("navToggle"), navLinks=$("navLinks");
   function closeNav(){ navLinks.classList.remove("open"); navToggle.setAttribute("aria-expanded","false"); }
   navToggle.addEventListener("click", function(){ var o=navLinks.classList.toggle("open"); navToggle.setAttribute("aria-expanded", o?"true":"false"); });
-  Array.prototype.forEach.call(navLinks.querySelectorAll("a"), function(a){ a.addEventListener("click", closeNav); });
+  Array.prototype.forEach.call(navLinks.querySelectorAll("a"), function(a){ a.addEventListener("click", function(e){ if(a.getAttribute("href")==="#"){ e.preventDefault(); } closeNav(); }); });
 
   // contact inquiry form -> composes an email to info@kestrelinvest.xyz
   var CONTACT_ENDPOINT=""; // set to a form endpoint later to capture server-side; falls back to mailto compose

@@ -98,6 +98,8 @@
   .sec ul li { position: relative; padding-left: 22px; color: color-mix(in srgb, var(--ink) 86%, var(--muted)); }
   .sec ul li::before { content: ""; position: absolute; left: 4px; top: 10px; width: 6px; height: 6px; border-radius: 2px; background: var(--accent); }
   .sec strong { color: var(--ink); font-weight: 700; }
+  .sec a { color: var(--accent-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent); text-underline-offset: 3px; }
+  .sec a:hover { text-decoration-color: var(--accent); }
   .lead { font-size: 18px !important; color: var(--muted) !important; }
   .callout { margin: 18px 0; border: 1px solid var(--card-line); border-left: 3px solid var(--accent); border-radius: 12px; background: var(--surface); padding: 18px 20px; }
   .callout .ct { font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 6px; }
@@ -387,7 +389,7 @@
   var navToggle=$("navToggle"), navLinks=$("navLinks");
   function closeNav(){ navLinks.classList.remove("open"); navToggle.setAttribute("aria-expanded","false"); }
   navToggle.addEventListener("click", function(){ var o=navLinks.classList.toggle("open"); navToggle.setAttribute("aria-expanded", o?"true":"false"); });
-  Array.prototype.forEach.call(navLinks.querySelectorAll("a"), function(a){ a.addEventListener("click", closeNav); });
+  Array.prototype.forEach.call(navLinks.querySelectorAll("a"), function(a){ a.addEventListener("click", function(e){ if(a.getAttribute("href")==="#"){ e.preventDefault(); } closeNav(); }); });
 
   var EA_ENDPOINT="";
   var overlay=$("eaOverlay"), formView=$("eaFormView"), doneView=$("eaDoneView");
