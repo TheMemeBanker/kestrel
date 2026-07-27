@@ -52,7 +52,7 @@
   .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
   .brand .logo { width: 26px; height: 26px; color: var(--accent); }
   .brand b { font-size: 16px; letter-spacing: 3px; font-weight: 650; }
-  .brand .tm { align-self: flex-start; margin: 3px 0 0 2px; font-size: 8px; font-weight: 600; letter-spacing: .02em; color: var(--muted); }
+  .brand .tm { font-size: 8px; font-weight: 600; letter-spacing: 0; vertical-align: super; margin-left: -1px; color: var(--muted); }
   .nav-links { margin-left: auto; display: flex; align-items: center; gap: 22px; }
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-family: inherit; }
   .nav-links a:hover { color: var(--ink); }
@@ -101,12 +101,12 @@
   .sec-head p { margin: 12px 0 0; color: var(--muted); font-size: 16.5px; }
 
   /* engine + circles */
-  .stagegrid { display: grid; grid-template-columns: 208px 1.5fr 244px; gap: 18px; align-items: stretch; }
-  @media (max-width: 1000px) { .stagegrid { grid-template-columns: 1fr; gap: 14px; } .panel { order: 1; } .rail { order: 2; } .stocks { order: 3; } .pcard { flex: none; } .slist { flex: none; max-height: none; overflow: visible; } }
+  .stagegrid { display: grid; grid-template-columns: 208px 1.5fr 244px; gap: 18px; align-items: start; }
+  @media (max-width: 1000px) { .stagegrid { grid-template-columns: 1fr; gap: 14px; } .panel { order: 1; } .rail { order: 2; } .stocks { order: 3; max-height: none; } .pcard { flex: none; } .slist { flex: none; max-height: none; overflow: visible; } }
   @media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 30px; padding: 46px 0 40px; } .hero-img { order: -1; aspect-ratio: 16 / 10; } }
 
   /* tokenized stocks column */
-  .stocks { display: flex; flex-direction: column; min-height: 0; gap: 10px; }
+  .stocks { display: flex; flex-direction: column; min-height: 0; gap: 10px; max-height: 560px; }
   .stocks-h .l { font-family: ui-monospace, monospace; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
   .stocks-h .l b { color: var(--ink); }
   .stocks-h .via { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-family: ui-monospace, monospace; font-size: 10.5px; color: var(--accent-ink); }
@@ -345,7 +345,7 @@
 
 <nav>
   <div class="nav-in">
-    <a class="brand" href="https://kestrelinvest.xyz"><svg class="logo"><use href="#kestrel"/></svg><b>KESTREL</b><span class="tm">&#8482;</span></a>
+    <a class="brand" href="https://kestrelinvest.xyz"><svg class="logo"><use href="#kestrel"/></svg><b>KESTREL<span class="tm">&#8482;</span></b></a>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <div class="nav-links" id="navLinks">
       <a href="portfolios.html">Portfolios</a>
