@@ -45,6 +45,7 @@
   .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
   .brand .logo { width: 26px; height: 26px; color: var(--accent); }
   .brand b { font-size: 16px; letter-spacing: 3px; font-weight: 650; }
+  .brand .tm { align-self: flex-start; margin: 3px 0 0 2px; font-size: 8px; font-weight: 600; letter-spacing: .02em; color: var(--muted); }
   .nav-links { margin-left: auto; display: flex; align-items: center; gap: 22px; }
   .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-family: inherit; }
   .nav-links a:hover { color: var(--ink); }
@@ -193,7 +194,7 @@
 
 <nav>
   <div class="nav-in">
-    <a class="brand" href="index.html"><svg class="logo"><use href="#kestrel"/></svg><b>KESTREL</b></a>
+    <a class="brand" href="index.html"><svg class="logo"><use href="#kestrel"/></svg><b>KESTREL</b><span class="tm">&#8482;</span></a>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <div class="nav-links" id="navLinks">
       <a href="portfolios.html">Portfolios</a>
