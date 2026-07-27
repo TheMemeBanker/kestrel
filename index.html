@@ -16,7 +16,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Kestrel — Wealth that rebalances itself">
 <meta name="twitter:description" content="A diversified portfolio of tokenized US stocks & ETFs that quietly rebalances itself.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e9f6e'/%3E%3Cpath d='M32 14l14 22c-4-3-9-5-14-5s-10 2-14 5L32 14z' fill='%23eafff4'/%3E%3Ccircle cx='32' cy='45' r='4' fill='%23eafff4'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e9f6e'/%3E%3Cg fill='%23eafff4' transform='translate(5.8,5.2) scale(0.82)'%3E%3Cpath d='M33 28 C 43 21 53 17 61 14 L 55 20 L 57 24 L 50 25 L 52 30 L 44 30 L 46 36 L 38 34 L 39 41 L 33 38 Z'/%3E%3Cpath d='M31 28 C 21 21 11 17 3 14 L 9 20 L 7 24 L 14 25 L 12 30 L 20 30 L 18 36 L 26 34 L 25 41 L 31 38 Z'/%3E%3Cpath d='M28 50 L36 50 L36 62 L33.5 58 L32 61 L30.5 58 L28 62 Z'/%3E%3Cpath d='M32 24 C 39 28 39 43 32 54 C 25 43 25 28 32 24 Z'/%3E%3Cpath d='M32 9 C 38 9 41 13 41 18 C 41 22 37 25 32 25 C 27 25 23 22 23 18 C 23 13 26 9 32 9 Z'/%3E%3C/g%3E%3C/svg%3E">
 <style>
   :root {
     --bg:#f5f8f6; --surface:#ffffff; --surface-2:#f0f5f1;
@@ -144,6 +144,11 @@
   .chart .halo { fill: var(--accent); opacity: .35; animation: halo 1.5s ease-out infinite; transform-box: fill-box; transform-origin: center; }
   @keyframes halo { 0%{ transform: scale(.6); opacity:.5 } 70%{ transform: scale(2.4); opacity:0 } 100%{ opacity:0 } }
   .chart .base-lab { font-family: ui-monospace, monospace; font-size: 9.5px; fill: var(--muted); letter-spacing: .08em; }
+  .chart .mlab { font-family: ui-monospace, monospace; font-size: 10px; fill: var(--muted); text-anchor: middle; opacity: .7; }
+  .chart .mlab.on { fill: var(--accent-ink); font-weight: 700; opacity: 1; }
+  .chart .mtick { stroke: var(--line); stroke-width: 1; }
+  .chart .axis { stroke: var(--line); stroke-width: 1; }
+  .chart .mcap { font-family: ui-monospace, monospace; font-size: 8.5px; fill: var(--muted); text-anchor: middle; letter-spacing: .1em; text-transform: uppercase; opacity: .8; }
   .clegend { display: flex; gap: 20px; margin-top: 10px; font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: .005em; }
   .clegend span { display: inline-flex; align-items: center; gap: 7px; }
   .clegend i { width: 14px; height: 3px; border-radius: 2px; flex: none; }
@@ -315,6 +320,7 @@
           </div>
           <svg class="chart" id="kChart" viewBox="0 0 520 190" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Kestrel versus market value">
             <defs><linearGradient id="kfill" x1="0" y1="0" x2="0" y2="1"><stop class="s0" offset="0"></stop><stop class="s1" offset="1"></stop></linearGradient></defs>
+            <g class="months" id="kMonths"></g>
             <line class="base" id="kBase"></line><text class="base-lab" id="kBaseLab"></text>
             <path class="area" id="kArea" d=""></path>
             <path class="bh" id="kLineBH" d=""></path>
@@ -420,7 +426,7 @@
   var CORDER=["--cash","--gold","--sol","--blue","--mid","--small"];
   var PORT={Roost:[["SPY",25],["SCHD",15],["AAPL",10],["SGOV",50]],Perch:[["SPY",25],["QQQ",15],["AAPL",10],["MSFT",10],["BRK.B",10],["GLD",5],["SGOV",25]],Soar:[["QQQ",20],["MSFT",13],["AMZN",12],["NVDA",20],["META",10],["HOOD",10],["GLD",5],["SGOV",10]],Apex:[["NVDA",18],["HOOD",12],["PLTR",10],["TSLA",9],["MU",7],["SPCX",16],["MSTR",10],["COIN",8],["GLD",10]]};
   var SCNMOOD={Choppy:"Monitoring a choppy market",Bull:"Riding a rising market",Bear:"Defending a falling market",Crash:"Navigating a crash & recovery"};
-  var VB={w:520,h:190,l:6,r:70,t:14,b:18};
+  var VB={w:520,h:190,l:8,r:14,t:12,b:28};
 
   function build(name, scn){
     var R=RET[scn];
@@ -453,7 +459,18 @@
 
   var $=function(id){ return document.getElementById(id); };
   var val=$("kVal"), delta=$("kDelta"), bh2=$("kBh"), month=$("kMonth"), plab=$("kPlab"), status=$("kStatus");
-  var base=$("kBase"), baseLab=$("kBaseLab"), lineBH=$("kLineBH"), lineREB=$("kLineREB"), lead=$("kLead"), halo=$("kHalo"), mlead=$("kMLead"), area=$("kArea");
+  var base=$("kBase"), baseLab=$("kBaseLab"), lineBH=$("kLineBH"), lineREB=$("kLineREB"), lead=$("kLead"), halo=$("kHalo"), mlead=$("kMLead"), area=$("kArea"), monthsEl=$("kMonths");
+  var mlabs=[];
+  // build the month axis (1..12) once — positions are fixed by VB, independent of scenario
+  (function(){
+    var yB=VB.h-VB.b, s='<line class="axis" x1="'+xs(0).toFixed(1)+'" y1="'+yB+'" x2="'+xs(N).toFixed(1)+'" y2="'+yB+'"></line>';
+    for(var mo=1;mo<=N;mo++){ var x=xs(mo).toFixed(1);
+      s+='<line class="mtick" x1="'+x+'" y1="'+yB+'" x2="'+x+'" y2="'+(yB+3)+'"></line>';
+      s+='<text class="mlab" x="'+x+'" y="'+(VB.h-7)+'">'+mo+'</text>';
+    }
+    monthsEl.innerHTML=s;
+    mlabs=Array.prototype.slice.call(monthsEl.querySelectorAll(".mlab"));
+  })();
   var prog=$("kProg"), playBtn=$("kPlay"), bar=$("kBar"), leg=$("kLeg"), eventEl=$("kEvent");
   var scnTabs=$("kScn"), pcards=Array.prototype.slice.call($("kRail").querySelectorAll(".pcard"));
 
@@ -525,6 +542,8 @@
     lead.setAttribute("cx",xs(lx)); lead.setAttribute("cy",lyv);
     halo.setAttribute("cx",xs(lx)); halo.setAttribute("cy",lyv);
     mlead.setAttribute("cx",xs(lx)); mlead.setAttribute("cy",myv);
+    var cm=Math.min(N,Math.round(tau));
+    for(var q=0;q<mlabs.length;q++){ mlabs[q].classList.toggle("on",(q+1)===cm); }
   }
   function finish(){
     halo.setAttribute("opacity","0"); mlead.setAttribute("opacity","1");
