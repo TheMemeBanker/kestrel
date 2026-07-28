@@ -99,6 +99,9 @@
   .sec-head .eyebrow { margin-bottom: 12px; }
   .sec-head h2 { margin: 0; font-size: clamp(28px, 3.8vw, 42px); font-weight: 700; letter-spacing: -.012em; line-height: 1.05; }
   .sec-head p { margin: 12px 0 0; color: var(--muted); font-size: 16.5px; }
+  .sec-head .sh-bullets { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 9px; max-width: 60ch; }
+  .sec-head .sh-bullets li { position: relative; padding-left: 22px; color: var(--muted); font-size: 15.5px; line-height: 1.5; }
+  .sec-head .sh-bullets li::before { content: ""; position: absolute; left: 3px; top: 9px; width: 6px; height: 6px; border-radius: 2px; background: var(--accent); }
 
   /* engine + circles */
   .stagegrid { display: grid; grid-template-columns: 208px 1.5fr 244px; gap: 18px; align-items: start; }
@@ -362,7 +365,11 @@
     <div class="sec-head rise">
       <p class="eyebrow">The advisor at work</p>
       <h2>Watch your agentic advisor hold the line.</h2>
-      <p>Pick a portfolio and a market. Kestrel rebalances only when the market pushes your mix out of balance — a lot in volatile stretches, not at all when it's calm.</p>
+      <ul class="sh-bullets">
+        <li>Pick a portfolio and a market.</li>
+        <li>Kestrel rebalances only when the market pushes your mix off target.</li>
+        <li>A lot in volatile stretches — nothing when it's calm.</li>
+      </ul>
     </div>
 
     <div class="stagegrid" id="portfolios">
