@@ -17,6 +17,9 @@
 <meta name="twitter:title" content="Portfolios — Kestrel">
 <meta name="twitter:description" content="Four risk-laddered Kestrel portfolios of tokenized US stocks, ETFs and gold — full holdings, target allocations, and how the agentic advisor rebalances back to target.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230e9f6e'/%3E%3Cg fill='%23eafff4' transform='translate(5.8,5.2) scale(0.82)'%3E%3Cpath d='M33 28 C 43 21 53 17 61 14 L 55 20 L 57 24 L 50 25 L 52 30 L 44 30 L 46 36 L 38 34 L 39 41 L 33 38 Z'/%3E%3Cpath d='M31 28 C 21 21 11 17 3 14 L 9 20 L 7 24 L 14 25 L 12 30 L 20 30 L 18 36 L 26 34 L 25 41 L 31 38 Z'/%3E%3Cpath d='M28 50 L36 50 L36 62 L33.5 58 L32 61 L30.5 58 L28 62 Z'/%3E%3Cpath d='M32 24 C 39 28 39 43 32 54 C 25 43 25 28 32 24 Z'/%3E%3Cpath d='M32 9 C 38 9 41 13 41 18 C 41 22 37 25 32 25 C 27 25 23 22 23 18 C 23 13 26 9 32 9 Z'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
 <style>
   :root {
     --bg:#f5f8f6; --surface:#ffffff; --surface-2:#f0f5f1;
@@ -226,6 +229,7 @@
   }
   @media (prefers-reduced-motion: reduce) { .abar > span { transition: none; } html { scroll-behavior: auto; } }
 </style>
+<link rel="stylesheet" href="elevate.css">
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="kestrel" viewBox="0 0 64 64">
@@ -262,9 +266,9 @@
     <h1>Four portfolios.<br><em>One discipline.</em></h1>
     <p>Every Kestrel portfolio is run by an <em>agentic advisor</em> — an autonomous agent that builds a diversified basket of tokenized US stocks, ETFs and gold to a target allocation, then holds it there. When markets move the mix out of line, your advisor rebalances it back. Automatically. Non-custodially.</p>
     <div class="stat-row">
-      <div class="stat"><b>4</b><span>Risk-laddered portfolios</span></div>
-      <div class="stat"><b>19</b><span>Tokenized securities</span></div>
-      <div class="stat"><b>3%</b><span>Drift-band rebalancing</span></div>
+      <div class="stat"><b data-count="4">4</b><span>Risk-laddered portfolios</span></div>
+      <div class="stat"><b data-count="19">19</b><span>Tokenized securities</span></div>
+      <div class="stat"><b data-count="3" data-suf="%">3%</b><span>Drift-band rebalancing</span></div>
       <div class="stat"><b>24/7</b><span>Traded on Solana</span></div>
     </div>
   </header>
@@ -523,5 +527,6 @@
 })();
 </script>
 
+<script src="elevate.js" defer></script>
 </body>
 </html>
