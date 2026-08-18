@@ -341,7 +341,6 @@
   @media (max-width: 900px){
     .wrap{display:flex;flex-direction:column}
     .wrap > .hero{order:-3}
-    .wrap > .film{order:-2;padding-top:26px}
     body{padding-bottom:72px}
     .mcta{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb, var(--bg) 84%, transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line)}
     .mcta .btn{flex:1;justify-content:center;font-size:15px;padding:13px 0}
@@ -389,21 +388,6 @@
 
 <div class="wrap">
   <!-- ENGINE -->
-  <section class="sec film" id="film">
-    <div class="sec-head rise">
-      <p class="eyebrow">The film</p>
-      <h2>See the full Kestrel story.</h2>
-      <p class="sub">How you invest, the five asset classes, the portfolios and their real holdings, our methodology, the $KESTREL token, and why we're different — fully narrated, 2:36.</p>
-    </div>
-    <div class="film-wrap rise d2">
-      <video id="kfilm" controls preload="metadata" playsinline poster="kestrel-demo-poster.jpg">
-        <source src="kestrel-demo.mp4" type="video/mp4">
-        <track kind="captions" src="kestrel-demo.vtt" srclang="en" label="English" default>
-      </video>
-    </div>
-    <p class="film-note">Illustrative simulation — not a projection of returns. Kestrel is in development.</p>
-  </section>
-
   <section class="sec" id="how">
     <div class="sec-head rise">
       <p class="eyebrow">The advisor at work</p>
@@ -513,6 +497,22 @@
       <span class="img-tag"><b>Kestrel</b> · your money, quietly at work</span>
     </div>
   </header>
+
+  <section class="sec film" id="film">
+    <div class="sec-head rise">
+      <p class="eyebrow">The film</p>
+      <h2>See the full Kestrel story.</h2>
+      <p class="sub">How you invest, the five asset classes, the portfolios and their real holdings, our methodology, the $KESTREL token, and why we're different — fully narrated, 2:36.</p>
+    </div>
+    <div class="film-wrap rise d2">
+      <video id="kfilm" controls preload="metadata" playsinline poster="kestrel-demo-poster.jpg">
+        <source src="kestrel-demo.mp4" type="video/mp4">
+        <track kind="captions" src="kestrel-demo.vtt" srclang="en" label="English" default>
+      </video>
+    </div>
+    <p class="film-note">Illustrative simulation — not a projection of returns. Kestrel is in development.</p>
+  </section>
+
 
   <!-- FEATURES -->
   <section class="sec">
