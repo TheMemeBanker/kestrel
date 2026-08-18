@@ -216,7 +216,7 @@
     <p class="eyebrow">Methodology · Whitepaper</p>
     <h1>How Kestrel's agentic advisors invest.</h1>
     <p>Kestrel replaces the human advisor with an <em>agentic advisor</em>: an autonomous, rules-based agent that builds a diversified portfolio of tokenized US securities, holds it to a disciplined target, and rebalances it as markets move — non-custodially, around the clock, on Solana. This paper sets out the philosophy, construction, and controls behind it.</p>
-    <div class="meta"><span>Version <b>1.0</b></span><span>Asset class <b>Tokenized US equities, ETFs &amp; gold</b></span><span>Network <b>Solana</b></span><span>Custody <b>Non-custodial</b></span></div>
+    <div class="meta"><span>Version <b>1.0</b></span><span>Asset class <b>Tokenized US equities, ETFs, gold &amp; silver</b></span><span>Network <b>Solana</b></span><span>Custody <b>Non-custodial</b></span></div>
   </header>
 
   <div class="doc">
@@ -257,23 +257,23 @@
 
       <section class="sec" id="universe">
         <h2><span class="k">03</span>Asset universe</h2>
-        <p>Kestrel invests exclusively in <strong>tokenized real-world securities</strong> issued via Backpack Securities — 1:1 tokenized US stocks, ETFs, and gold that trade 24/7 on Solana and settle in USD terms. This gives round-the-clock, programmatic access to blue-chip US markets with on-chain settlement.</p>
+        <p>Kestrel invests exclusively in <strong>tokenized real-world securities</strong> issued via Backpack Securities and partner issuers — 1:1 tokenized US stocks, ETFs, gold, and silver that trade 24/7 on Solana and settle in USD terms. This gives round-the-clock, programmatic access to blue-chip US markets with on-chain settlement.</p>
         <p>The universe spans four building blocks, combined in different proportions across the four portfolios:</p>
         <ul>
           <li><strong>Broad-market ETFs</strong> (e.g. S&amp;P 500, Nasdaq-100, dividend) — low-cost diversified cores.</li>
           <li><strong>Blue-chip equities</strong> (e.g. Apple, Microsoft, Nvidia, Berkshire) — quality large-caps.</li>
           <li><strong>Growth &amp; frontier names</strong> (e.g. SpaceX, Palantir, Robinhood) — higher-return, higher-volatility exposure.</li>
-          <li><strong>Ballast</strong> — gold as a hedge and Treasuries / cash for stability.</li>
+          <li><strong>Ballast</strong> — gold &amp; silver as hedges and Treasuries / cash for stability.</li>
         </ul>
         <p>Every candidate must clear liquidity and integrity screens before it can enter a portfolio; names that fail screening are excluded, and the mix is capped so no single position can dominate.</p>
       </section>
 
       <section class="sec" id="construction">
         <h2><span class="k">04</span>Portfolio construction</h2>
-        <p>Kestrel offers four risk-laddered portfolios. Each has a fixed <strong>target allocation</strong> across stocks, gold, and cash — the anchor the advisor holds you to. Risk rises as the stock share rises and the cash ballast falls.</p>
+        <p>Kestrel offers four risk-laddered portfolios. Each has a fixed <strong>target allocation</strong> across stocks, metals, and cash — the anchor the advisor holds you to. Risk rises as the stock share rises and the cash ballast falls.</p>
         <div class="tt-wrap">
         <table class="tt">
-          <thead><tr><th>Portfolio</th><th>Risk</th><th>Stocks</th><th>Gold</th><th>Cash</th></tr></thead>
+          <thead><tr><th>Portfolio</th><th>Risk</th><th>Stocks</th><th>Metals</th><th>Cash</th></tr></thead>
           <tbody>
             <tr><td class="pf">Roost</td><td>Conservative</td><td class="n">50%</td><td class="n">—</td><td class="n">50%</td></tr>
             <tr><td class="pf">Perch</td><td>Moderate</td><td class="n">70%</td><td class="n">5%</td><td class="n">25%</td></tr>
@@ -282,7 +282,7 @@
           </tbody>
         </table>
         </div>
-        <p>Within the stock sleeve, weights are <strong>capped</strong> so a single pumped name can't come to define the portfolio, and diversified across sectors and factors. Gold is added from the Moderate tier upward as a hedge that tends to hold up when equities fall. Full holdings for each portfolio are published on the <a href="portfolios.html">Portfolios</a> page.</p>
+        <p>Within the stock sleeve, weights are <strong>capped</strong> so a single pumped name can't come to define the portfolio, and diversified across sectors and factors. A gold &amp; silver sleeve is added from the Moderate tier upward — hedges that tend to hold up when equities fall. Full holdings for each portfolio are published on the <a href="portfolios.html">Portfolios</a> page.</p>
       </section>
 
       <section class="sec" id="rebalancing">
@@ -296,7 +296,7 @@
         </div>
         <h3>The rebalancing premium</h3>
         <p>Systematically trimming what has run ahead and topping up what has fallen behind is a disciplined "sell-high, buy-low." Across choppy, trending, and crashing markets, this tends to add return versus simply holding the same basket untouched — and, just as importantly, keeps your risk from quietly creeping above the level you chose as winners balloon.</p>
-        <div class="callout"><div class="ct">Illustration</div><p>If growth names rally and push your stock share from 60% to 73%, your portfolio is now riskier than you signed up for. The advisor trims the excess back to 60% and restores the gold and cash — resetting both your risk and your discipline.</p></div>
+        <div class="callout"><div class="ct">Illustration</div><p>If growth names rally and push your stock share from 60% to 73%, your portfolio is now riskier than you signed up for. The advisor trims the excess back to 60% and restores the metals and cash — resetting both your risk and your discipline.</p></div>
       </section>
 
       <section class="sec" id="risk">
@@ -305,7 +305,7 @@
         <ul>
           <li><strong>Diversification</strong> — every portfolio spreads across many names, sectors, and asset classes.</li>
           <li><strong>Position caps</strong> — single-name weights are limited so no one holding can sink the portfolio.</li>
-          <li><strong>Ballast &amp; hedges</strong> — Treasuries/cash and gold cushion drawdowns and dampen volatility.</li>
+          <li><strong>Ballast &amp; hedges</strong> — Treasuries/cash and metals cushion drawdowns and dampen volatility.</li>
           <li><strong>Drift control</strong> — rebalancing prevents risk from silently drifting above your chosen level.</li>
           <li><strong>Screening</strong> — the inclusion screen fails closed: when in doubt, a name stays out.</li>
         </ul>

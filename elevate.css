@@ -90,6 +90,7 @@ html.kx-js [data-reveal].kx-in{ opacity:1; transform:none;
   background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%), var(--glow), transparent 60%); }
 [data-spot]:hover::before{ opacity:1; }
 [data-spot] > *{ position:relative; z-index:1; }
+.hero-img > .img-tag{ position:absolute; z-index:2; }
 
 /* ---------- Button sheen sweep ---------- */
 .btn.solid{ position:relative; overflow:hidden; }
