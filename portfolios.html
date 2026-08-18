@@ -228,6 +228,31 @@
     .ea-modal { padding: 26px 20px 22px; border-radius: 18px 18px 16px 16px; }
   }
   @media (prefers-reduced-motion: reduce) { .abar > span { transition: none; } html { scroll-behavior: auto; } }
+
+  /* ── fit quiz ── */
+  .quiz { max-width: 860px; margin: 0 auto 26px; background: var(--surface); border: 1px solid var(--card-line); border-radius: 22px; padding: 28px clamp(18px, 4vw, 40px) 30px; }
+  .quiz .q-prog { display: flex; gap: 7px; margin-bottom: 22px; }
+  .quiz .q-prog i { height: 4px; flex: 1; border-radius: 2px; background: var(--card-line); transition: background .25s ease; }
+  .quiz .q-prog i.on { background: var(--accent); }
+  .quiz h3 { margin: 0 0 6px; font-size: clamp(19px, 2.6vw, 24px); font-weight: 700; letter-spacing: -.01em; }
+  .quiz .q-sub { margin: 0 0 18px; color: var(--muted); font-size: 14.5px; }
+  .quiz .q-opts { display: flex; flex-direction: column; gap: 10px; }
+  .quiz .q-opt { text-align: left; font: inherit; color: inherit; background: var(--surface-2, transparent); border: 1px solid var(--card-line); border-radius: 14px; padding: 14px 16px; cursor: pointer; transition: border-color .15s ease, transform .15s ease; }
+  .quiz .q-opt:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--card-line)); transform: translateY(-1px); }
+  .quiz .q-opt b { display: block; font-size: 15.5px; margin-bottom: 2px; }
+  .quiz .q-opt span { color: var(--muted); font-size: 13.5px; }
+  .quiz .q-back { margin-top: 16px; background: none; border: none; color: var(--muted); font: inherit; font-size: 13.5px; cursor: pointer; padding: 0; }
+  .quiz .q-back:hover { color: var(--ink); }
+  .q-result { display: none; text-align: center; }
+  .q-result.show { display: block; }
+  .q-result .qr-tag { display: inline-block; margin-bottom: 12px; }
+  .q-result .qr-donut { width: 132px; height: 132px; border-radius: 50%; margin: 6px auto 14px; position: relative; }
+  .q-result .qr-donut::after { content:""; position: absolute; inset: 24px; border-radius: 50%; background: var(--surface); }
+  .q-result h3 { font-size: clamp(24px, 3.4vw, 32px); }
+  .q-result .qr-split { color: var(--muted); font-size: 15px; margin: 4px 0 18px; }
+  .q-result .qr-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .q-result .qr-note { margin-top: 16px; font-size: 12px; color: var(--ink-faint, #5f7568); }
+  .q-result .q-back { margin-top: 14px; }
 </style>
 <link rel="stylesheet" href="elevate.css">
 
@@ -293,6 +318,17 @@
       </div>
     </div>
   </section>
+
+  <div class="sec-lead" id="quiz-lead">
+    <p class="eyebrow">Find your fit</p>
+    <h2>Which portfolio are you?</h2>
+    <p>Five quick questions — no wallet, no email. Answers stay on this page.</p>
+  </div>
+  <div class="quiz" id="quiz">
+    <div class="q-prog" id="qProg"></div>
+    <div id="qStep"></div>
+    <div class="q-result" id="qResult"></div>
+  </div>
 
   <div class="sec-lead">
     <p class="eyebrow">The line-up</p>
@@ -430,9 +466,9 @@
     }).join("");
     var split=''
       +(stock?'<div class="sr"><span>Stocks</span><b>'+stock+'%</b></div>':'')
-      +(gold?'<div class="sr"><span>Gold</span><b>'+gold+'%</b></div>':'')
+      +(gold?'<div class="sr"><span>Gold &amp; Silver</span><b>'+gold+'%</b></div>':'')
       +(cash?'<div class="sr"><span>Cash &amp; Treasuries</span><b>'+cash+'%</b></div>':'');
-    return '<section class="pf">'
+    return '<section class="pf" id="pf-'+p.k.toLowerCase()+'">'
       +'<div class="pf-top"><div class="pf-rank">0'+(idx+1)+'</div>'
         +'<div class="pf-title"><h3>'+p.k+'</h3><p>'+p.thesis+'</p></div>'
         +'<span class="pf-tag '+p.tc+'">'+p.tier+'</span></div>'
@@ -527,6 +563,69 @@
       .catch(function(){ eaSubmit.disabled=false; eaSubmit.textContent="Request early access"; setErr(eaEmail,eaEErr,"Something went wrong — please try again."); });
   });
 })();
+
+  /* ---------- fit quiz ---------- */
+  (function(){
+    var QQ=function(id){ return document.getElementById(id); };
+    var QS=[
+      {q:"If your portfolio dropped 20% in a month, you would…", sub:"Be honest — this is the one that matters.",
+       o:[["Sell — I couldn't watch it fall further",0],["Hold and wait it out",1],["Buy more at the discount",2]]},
+      {q:"When do you expect to need this money?", sub:"Your time horizon.",
+       o:[["Within 3 years",0],["3–10 years out",1],["10+ years — this is long-term capital",2]]},
+      {q:"What's the goal for this account?", sub:"",
+       o:[["Protect what I have",0],["Steady growth with guardrails",1],["Maximum growth — I accept the swings",2]]},
+      {q:"How much investing experience do you have?", sub:"",
+       o:[["I'm new to this",0],["I've held funds or stocks for years",1],["Very experienced — I trade and understand drawdowns",2]]},
+      {q:"How much of your total savings would this be?", sub:"",
+       o:[["Most of it",0],["A meaningful slice",1],["A small part — I'm diversified elsewhere",2]]}
+    ];
+    var MAP=[["Roost","r1","Conservative","50% stocks · 50% cash & Treasuries",
+              "conic-gradient(var(--accent) 0 180deg, var(--cash) 180deg 360deg)"],
+             ["Perch","r2","Moderate","70% stocks · 5% metals · 25% cash",
+              "conic-gradient(var(--accent) 0 252deg, var(--gold) 252deg 270deg, var(--cash) 270deg 360deg)"],
+             ["Soar","r3","Growth","85% stocks · 5% metals · 10% cash",
+              "conic-gradient(var(--accent) 0 306deg, var(--gold) 306deg 324deg, var(--cash) 324deg 360deg)"],
+             ["Apex","r4","Aggressive","90% stocks · 10% metals",
+              "conic-gradient(var(--accent) 0 324deg, var(--gold) 324deg 360deg)"]];
+    var stepEl=QQ("qStep"), resEl=QQ("qResult"), progEl=QQ("qProg");
+    if(!stepEl) return;
+    var idx=0, answers=[];
+    function prog(){ progEl.innerHTML=QS.map(function(_,i){ return '<i class="'+(i<=idx&&resEl.className.indexOf("show")<0? (i<idx?"on":"on") : (resEl.className.indexOf("show")>=0?"on":""))+'"></i>'; }).join(""); }
+    function step(){
+      resEl.className="q-result"; stepEl.style.display="";
+      var q=QS[idx];
+      stepEl.innerHTML='<h3>'+q.q+'</h3>'+(q.sub?'<p class="q-sub">'+q.sub+'</p>':'')
+        +'<div class="q-opts">'+q.o.map(function(o,i){ return '<button class="q-opt" type="button" data-v="'+o[1]+'"><b>'+o[0]+'</b></button>'; }).join("")+'</div>'
+        +(idx>0?'<button class="q-back" type="button" id="qBack">← Back</button>':'');
+      progEl.innerHTML=QS.map(function(_,i){ return '<i class="'+(i<idx?"on":(i===idx?"on":""))+'"></i>'; }).join("");
+      Array.prototype.forEach.call(stepEl.querySelectorAll(".q-opt"), function(b){
+        b.addEventListener("click", function(){ answers[idx]=+b.getAttribute("data-v");
+          if(idx<QS.length-1){ idx++; step(); } else { result(); } });
+      });
+      var bk=QQ("qBack"); if(bk) bk.addEventListener("click", function(){ idx=Math.max(0,idx-1); step(); });
+    }
+    function result(){
+      var sum=answers.reduce(function(a,b){return a+b;},0);           // 0..10
+      var horizon=answers[1], pick;
+      if(sum<=2) pick=0; else if(sum<=5) pick=1; else if(sum<=8) pick=2; else pick=3;
+      if(horizon===0 && pick>1) pick=1;                                // short horizon caps risk
+      var m=MAP[pick];
+      stepEl.style.display="none";
+      progEl.innerHTML=QS.map(function(){ return '<i class="on"></i>'; }).join("");
+      resEl.innerHTML='<span class="pf-tag qr-tag '+m[1]+'">'+m[2]+'</span>'
+        +'<div class="qr-donut" style="background:'+m[4]+'"></div>'
+        +'<h3>Your fit: '+m[0]+'</h3>'
+        +'<p class="qr-split">'+m[3]+'</p>'
+        +'<div class="qr-cta"><a class="btn" href="#pf-'+m[0].toLowerCase()+'">See the full breakdown ↓</a>'
+        +'<button class="btn solid js-ea2" type="button">Request early access</button></div>'
+        +'<button class="q-back" type="button" id="qRetake">Retake the quiz</button>'
+        +'<p class="qr-note">Guidance from your answers — not investment advice. You can pick any portfolio you like.</p>';
+      resEl.className="q-result show";
+      QQ("qRetake").addEventListener("click", function(){ idx=0; answers=[]; step(); });
+      var ea=resEl.querySelector(".js-ea2"); if(ea) ea.addEventListener("click", function(){ var t=document.querySelector(".js-ea"); if(t) t.click(); });
+    }
+    step();
+  })();
 </script>
 
 <script src="elevate.js" defer></script>
