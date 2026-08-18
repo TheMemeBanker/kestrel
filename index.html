@@ -4,18 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Kestrel — Wealth that rebalances itself</title>
-<meta name="description" content="Kestrel puts an agentic advisor on your portfolio — an autonomous agent that builds a diversified basket of tokenized US stocks, ETFs and gold, then rebalances it through every market. 24/7 on Solana, non-custodial.">
+<meta name="description" content="Kestrel puts an agentic advisor on your portfolio — an autonomous agent that builds a diversified basket of tokenized US stocks, ETFs, gold and silver, then rebalances it through every market. 24/7 on Solana, non-custodial.">
 <link rel="canonical" href="https://kestrelinvest.xyz/">
 <meta name="theme-color" content="#0e9f6e" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#04140d" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kestrel">
 <meta property="og:title" content="Kestrel — Wealth that rebalances itself">
-<meta property="og:description" content="Kestrel puts an agentic advisor on your portfolio — an autonomous agent that builds a diversified basket of tokenized US stocks, ETFs and gold, then rebalances it through every market. 24/7 on Solana, non-custodial.">
+<meta property="og:description" content="Kestrel puts an agentic advisor on your portfolio — an autonomous agent that builds a diversified basket of tokenized US stocks, ETFs, gold and silver, then rebalances it through every market. 24/7 on Solana, non-custodial.">
 <meta property="og:url" content="https://kestrelinvest.xyz/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Kestrel — Wealth that rebalances itself">
-<meta name="twitter:description" content="Kestrel puts an agentic advisor on your portfolio — an autonomous agent that builds a diversified basket of tokenized US stocks, ETFs and gold, then rebalances it through every market. 24/7 on Solana, non-custodial.">
+<meta name="twitter:description" content="Kestrel puts an agentic advisor on your portfolio — an autonomous agent that builds a diversified basket of tokenized US stocks, ETFs, gold and silver, then rebalances it through every market. 24/7 on Solana, non-custodial.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230e9f6e'/%3E%3Cg fill='%23eafff4'%3E%3Cpath d='M47 52 C 37 40 27 31 13 26 C 20 40 30 51 43 57 Z'/%3E%3Cpath d='M45 55 C 42 49 43 42 49 38 C 47 35 46 31 49 28 C 52 31 53 35 52 39 C 58 43 60 51 56 60 L 68 82 L 57 73 L 54 88 L 50 71 C 47 66 46 61 45 55 Z'/%3E%3Cpath d='M51 40 C 63 27 76 19 93 15 C 80 28 67 40 55 47 Z'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -336,6 +336,22 @@
     .ea-overlay { padding: 12px; align-items: flex-end; }
     .ea-modal { padding: 26px 20px 22px; border-radius: 18px 18px 16px 16px; }
   }
+  /* ── mobile UX layer ── */
+  .mcta{display:none}
+  @media (max-width: 900px){
+    .wrap{display:flex;flex-direction:column}
+    .wrap > .hero{order:-3}
+    .wrap > .film{order:-2;padding-top:26px}
+    body{padding-bottom:72px}
+    .mcta{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb, var(--bg) 84%, transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line)}
+    .mcta .btn{flex:1;justify-content:center;font-size:15px;padding:13px 0}
+    .stagegrid{grid-template-columns:minmax(0,1fr)}
+    .stocks,.panel,.rail{min-width:0;max-width:100%}
+    .slist{flex-direction:row !important;overflow-x:auto;overflow-y:hidden;gap:8px;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:100%}
+    .slist::-webkit-scrollbar{display:none}
+    .srow{flex:0 0 auto;min-width:176px}
+    .img-tag{display:none}
+  }
   @media (prefers-reduced-motion: reduce) { .halo,.abar.pulse,.live i,.rise { animation: none !important; } .abar > span { transition: none; } .rise { opacity:1; transform:none; } html { scroll-behavior: auto; } }
 </style>
 <link rel="stylesheet" href="elevate.css">
@@ -365,7 +381,7 @@
     <div class="nav-links" id="navLinks">
       <a href="portfolios.html">Portfolios</a>
       <a href="x402.html">x402</a>
-      <a href="#" id="tokenLink">$Kestrel</a>
+      <a href="#token" id="tokenLink">$Kestrel</a>
       <button class="btn solid js-ea" type="button">Request early access</button>
     </div>
   </div>
@@ -376,7 +392,7 @@
   <section class="sec film" id="film">
     <div class="sec-head rise">
       <p class="eyebrow">The film</p>
-      <h2>See Kestrel in two minutes.</h2>
+      <h2>See Kestrel in 2½ minutes.</h2>
       <p class="sub">How you invest, the five asset classes, the four portfolios, our methodology, and why Kestrel is different — fully narrated.</p>
     </div>
     <div class="film-wrap rise d2">
@@ -461,18 +477,18 @@
         </button>
         <button class="pcard" data-p="Perch" type="button">
           <span class="mini" style="--pie: conic-gradient(var(--surface) 0 0.55%, var(--accent) 0.55% 69.45%, var(--surface) 69.45% 70.55%, var(--gold) 70.55% 74.45%, var(--surface) 74.45% 75.55%, var(--cash) 75.55% 99.45%, var(--surface) 99.45% 100%);"></span>
-          <span class="pc-info"><span class="pc-top"><b>Perch</b><span class="pc-tag r2">Moderate</span></span><span class="pc-desc">Balanced — a core of index funds and blue-chips, a little gold, cash in reserve.</span><span class="pc-split"><span class="bar"><span class="st" style="width:70%"></span><span class="gd" style="width:5%"></span></span><span><b>70%</b> stocks · 5% gold · 25% cash</span></span></span>
+          <span class="pc-info"><span class="pc-top"><b>Perch</b><span class="pc-tag r2">Moderate</span></span><span class="pc-desc">Balanced — a core of index funds and blue-chips, a little gold &amp; silver, cash in reserve.</span><span class="pc-split"><span class="bar"><span class="st" style="width:70%"></span><span class="gd" style="width:5%"></span></span><span><b>70%</b> stocks · 5% metals · 25% cash</span></span></span>
         </button>
         <button class="pcard on" data-p="Soar" type="button">
           <span class="mini" style="--pie: conic-gradient(var(--surface) 0 0.55%, var(--accent) 0.55% 84.45%, var(--surface) 84.45% 85.55%, var(--gold) 85.55% 89.45%, var(--surface) 89.45% 90.55%, var(--cash) 90.55% 99.45%, var(--surface) 99.45% 100%);"></span>
-          <span class="pc-info"><span class="pc-top"><b>Soar</b><span class="pc-tag r3">Growth</span></span><span class="pc-desc">Growth-focused — leading tech and growth names, a gold hedge, only a sliver of cash.</span><span class="pc-split"><span class="bar"><span class="st" style="width:85%"></span><span class="gd" style="width:5%"></span></span><span><b>85%</b> stocks · 5% gold · 10% cash</span></span></span>
+          <span class="pc-info"><span class="pc-top"><b>Soar</b><span class="pc-tag r3">Growth</span></span><span class="pc-desc">Growth-focused — leading tech and growth names, a gold &amp; silver hedge, only a sliver of cash.</span><span class="pc-split"><span class="bar"><span class="st" style="width:85%"></span><span class="gd" style="width:5%"></span></span><span><b>85%</b> stocks · 5% metals · 10% cash</span></span></span>
         </button>
         <button class="pcard" data-p="Apex" type="button">
           <span class="mini" style="--pie: conic-gradient(var(--surface) 0 0.55%, var(--accent) 0.55% 89.45%, var(--surface) 89.45% 90.55%, var(--gold) 90.55% 99.45%, var(--surface) 99.45% 100%);"></span>
-          <span class="pc-info"><span class="pc-top"><b>Apex</b><span class="pc-tag r4">Aggressive</span></span><span class="pc-desc">Swing big — high-growth and speculative names, fully invested with a gold hedge.</span><span class="pc-split"><span class="bar"><span class="st" style="width:90%"></span><span class="gd" style="width:10%"></span></span><span><b>90%</b> stocks · 10% gold</span></span></span>
+          <span class="pc-info"><span class="pc-top"><b>Apex</b><span class="pc-tag r4">Aggressive</span></span><span class="pc-desc">Swing big — high-growth and speculative names, fully invested with a gold &amp; silver hedge.</span><span class="pc-split"><span class="bar"><span class="st" style="width:90%"></span><span class="gd" style="width:10%"></span></span><span><b>90%</b> stocks · 10% metals</span></span></span>
         </button>
         <div class="key">
-          <span><i style="background:var(--accent)"></i>Stocks</span><span><i style="background:var(--gold)"></i>Gold</span><span><i style="background:var(--cash)"></i>Cash</span>
+          <span><i style="background:var(--accent)"></i>Stocks</span><span><i style="background:var(--gold)"></i>Metals</span><span><i style="background:var(--cash)"></i>Cash</span>
         </div>
       </aside>
     </div>
@@ -483,7 +499,7 @@
     <div>
       <p class="eyebrow rise">Agentic advisors · Solana</p>
       <h1 class="rise d1">Wealth that <em>rebalances<br>itself.</em></h1>
-      <p class="lede rise d2">Kestrel puts an <em>agentic advisor</em> on your portfolio — an autonomous agent that builds you a diversified basket of tokenized US stocks, ETFs and gold, then rebalances it through every market, so you don't have to.</p>
+      <p class="lede rise d2">Kestrel puts an <em>agentic advisor</em> on your portfolio — an autonomous agent that builds you a diversified basket of tokenized US stocks, ETFs, gold and silver, then rebalances it through every market, so you don't have to.</p>
       <div class="cta-row rise d3">
         <button class="btn solid js-ea" type="button">Request early access</button>
         <a class="btn" href="#how">See it work ↓</a>
@@ -519,6 +535,32 @@
     </div>
   </section>
 
+  <section class="sec" id="token">
+    <div class="sec-head rise">
+      <p class="eyebrow">The $KESTREL token</p>
+      <h2>One token. Deeper ownership.</h2>
+      <p>Holding $KESTREL is designed to unlock the platform itself.</p>
+    </div>
+    <div class="features">
+      <div class="feat rise d1">
+        <span class="fi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18"/><path d="M17 7.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 2 2.6 5 3.2 5 1.3 5 3.3-2.2 3-5 3-5-1.1-5-3"/></svg></span>
+        <h4>Fee discounts</h4>
+        <p>Pay management fees in $KESTREL — at a discount to paying in anything else.</p>
+      </div>
+      <div class="feat rise d2">
+        <span class="fi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 4v5c0 4.4-3.2 7.4-8 9-4.8-1.6-8-4.6-8-9V7z"/><path d="M12 8v4"/></svg></span>
+        <h4>Governance</h4>
+        <p>Vote on new portfolios and which assets join the universe.</p>
+      </div>
+      <div class="feat rise d3">
+        <span class="fi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 13l4-8 3 5 3-3 4 9"/><path d="M4 19h16"/></svg></span>
+        <h4>Priority access</h4>
+        <p>First in line for every new strategy Kestrel launches.</p>
+      </div>
+    </div>
+    <p class="film-note">Token utility is in design — not an offer, and not a promise of value.</p>
+  </section>
+
   <section class="ea-band">
     <div class="ea-band-in">
       <span class="ea-eyebrow"><i></i>Now onboarding · Limited first cohort</span>
@@ -527,6 +569,8 @@
       <button class="btn solid js-ea" type="button">Request early access</button>
     </div>
   </section>
+
+  <div class="mcta"><button class="btn solid js-ea" type="button">Request early access</button></div>
 
   <footer>
     <div class="foot-links">
@@ -646,15 +690,15 @@
   var scnTabs=$("kScn"), pcards=Array.prototype.slice.call($("kRail").querySelectorAll(".pcard"));
 
   // tokenized-stocks column — every ticker backlinks to its Backpack page
-  var STOCKS=[["SGOV","Treasuries"],["GLD","Gold"],["SPY","S&P 500 ETF"],["QQQ","Nasdaq-100 ETF"],["SCHD","Dividend ETF"],["AAPL","Apple"],["MSFT","Microsoft"],["BRK.B","Berkshire"],["JPM","JPMorgan"],["AMZN","Amazon"],["NVDA","Nvidia"],["META","Meta"],["HOOD","Robinhood"],["PLTR","Palantir"],["TSLA","Tesla"],["MU","Micron"],["SPCX","SpaceX"],["MSTR","Strategy"],["COIN","Coinbase"]];
+  var STOCKS=[["SGOV","Treasuries"],["GLD","Gold"],["SILV","Silver"],["SPY","S&P 500 ETF"],["QQQ","Nasdaq-100 ETF"],["SCHD","Dividend ETF"],["AAPL","Apple"],["MSFT","Microsoft"],["BRK.B","Berkshire"],["JPM","JPMorgan"],["AMZN","Amazon"],["NVDA","Nvidia"],["META","Meta"],["HOOD","Robinhood"],["PLTR","Palantir"],["TSLA","Tesla"],["MU","Micron"],["SPCX","SpaceX"],["MSTR","Strategy"],["COIN","Coinbase"]];
   // per-ticker brand color + monogram (fallback tile if a logo can't load)
-  var BRAND={ SGOV:['#6b7787','T'], GLD:['#b8901e','Au'], SPY:['#2f6fed','S'], QQQ:['#5a3fd6','Q'],
+  var BRAND={ SGOV:['#6b7787','T'], GLD:['#b8901e','Au'], SILV:['#8f9aa8','Ag'], SPY:['#2f6fed','S'], QQQ:['#5a3fd6','Q'],
     SCHD:['#0f9e8e','D'], AAPL:['#4b4f56','A'], MSFT:['#2f8f3e','MS'], 'BRK.B':['#1b3a6b','B'],
     JPM:['#005eb8','J'], AMZN:['#e8830c','a'], NVDA:['#5c8a00','N'], META:['#0866ff','∞'],
     HOOD:['#00b34a','H'], PLTR:['#14161a','P'], TSLA:['#e82127','T'], MU:['#0a4d8c','MU'],
     SPCX:['#14161a','X'], MSTR:['#f7931a','₿'], COIN:['#0052ff','C'] };
   // company domain → real logo via a logo provider (loads on the live site; falls back to the tile in the CSP sandbox)
-  var DOMAIN={ SGOV:'ishares.com', GLD:'spdrgoldshares.com', SPY:'ssga.com', QQQ:'invesco.com',
+  var DOMAIN={ SGOV:'ishares.com', GLD:'spdrgoldshares.com', SILV:'dominion.market', SPY:'ssga.com', QQQ:'invesco.com',
     SCHD:'schwab.com', AAPL:'apple.com', MSFT:'microsoft.com', 'BRK.B':'berkshirehathaway.com',
     JPM:'jpmorganchase.com', AMZN:'amazon.com', NVDA:'nvidia.com', META:'meta.com',
     HOOD:'robinhood.com', PLTR:'palantir.com', TSLA:'tesla.com', MU:'micron.com',
