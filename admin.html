@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en" color-mode="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Kestrel · Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07100c;--surface:#0b1712;--card:#0e1d16;--line:rgba(46,230,160,.14);--ink:#eafff4;--muted:#8fb3a3;--accent:#2ee6a0;--accent2:#0e9f6e;--red:#ff6b6b;--gold:#cba52e}
+*{box-sizing:border-box;margin:0}
+body{font:15px/1.55 Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100dvh;padding:34px 22px 60px}
+.aur{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.aur i{position:absolute;width:52vmax;height:52vmax;border-radius:50%;filter:blur(70px);opacity:.16;mix-blend-mode:screen;animation:dr 26s ease-in-out infinite alternate}
+.aur i:nth-child(1){background:#2ee6a0;top:-24vmax;left:-14vmax}
+.aur i:nth-child(2){background:#0e9f6e;bottom:-28vmax;right:-16vmax;animation-delay:-9s}
+.aur i:nth-child(3){background:#1a6f52;top:30%;left:55%;animation-delay:-17s}
+@keyframes dr{to{transform:translate(6vmax,-4vmax) scale(1.12)}}
+.wrap{position:relative;z-index:1;max-width:1060px;margin:0 auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:30px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{width:38px;height:38px}
+.brand b{font:700 21px "Space Grotesk";letter-spacing:-.02em}
+.brand .tag{font:600 10.5px "JetBrains Mono";color:var(--accent);border:1px solid var(--line);border-radius:6px;padding:3px 8px;letter-spacing:.14em}
+.upd{font:400 12px "JetBrains Mono";color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.card{grid-column:span 4;background:linear-gradient(180deg,var(--card),var(--surface));border:1px solid var(--line);border-radius:18px;padding:22px 22px 20px;position:relative;overflow:hidden;animation:up .5s cubic-bezier(.2,.7,.2,1) both}
+.card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(140deg,rgba(46,230,160,.35),transparent 38%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.card.wide{grid-column:span 12}.card.half{grid-column:span 6}
+@media(max-width:860px){.card,.card.half{grid-column:span 12}}
+.k{font:600 11px "JetBrains Mono";letter-spacing:.16em;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.k i{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);display:inline-block}
+.v{font:700 clamp(30px,4.4vw,44px)/1.1 "Space Grotesk";letter-spacing:-.03em;margin-top:10px;font-variant-numeric:tabular-nums}
+.v small{font:600 15px "Space Grotesk";color:var(--muted)}
+.sub{margin-top:8px;color:var(--muted);font-size:12.5px}
+.sub b{color:var(--ink);font-weight:600}
+.hero .v{font-size:clamp(52px,8vw,84px);background:linear-gradient(120deg,#9dffdd,var(--accent) 45%,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.rowl{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.chip{font:600 12px "JetBrains Mono";border:1px solid var(--line);border-radius:8px;padding:6px 11px;color:var(--muted)}
+.chip.ok{color:var(--accent)}
+.chip.err{color:var(--red)}
+.ca{font:600 12px "JetBrains Mono";background:transparent;border:1px solid var(--line);border-radius:8px;padding:7px 12px;color:var(--muted);cursor:pointer}
+.ca:hover{color:var(--accent)}
+.foot{margin-top:26px;color:var(--muted);font-size:12px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot a{color:var(--accent);text-decoration:none}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.card:nth-child(2){animation-delay:.05s}.card:nth-child(3){animation-delay:.1s}.card:nth-child(4){animation-delay:.15s}.card:nth-child(5){animation-delay:.2s}.card:nth-child(6){animation-delay:.25s}.card:nth-child(7){animation-delay:.3s}
+</style>
+</head>
+<body>
+<div class="aur"><i></i><i></i><i></i></div>
+<div class="wrap">
+<header>
+  <div class="brand">
+    <svg viewBox="0 0 100 100" aria-hidden="true"><defs>
+      <linearGradient id="n" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#9dffdd"/><stop offset=".5" stop-color="#2ee6a0"/><stop offset="1" stop-color="#0e9f6e"/></linearGradient>
+    </defs><path fill="url(#n)" d="M14 62c14-8 26-20 34-34 3-5 9-6 13-2l22 20c4 4 3 10-2 13-16 9-34 13-52 12-6 0-12-3-15-9z"/></svg>
+    <b>Kestrel</b><span class="tag">ADMIN · LIVE DATA</span>
+  </div>
+  <span class="upd" id="upd">refreshing…</span>
+</header>
+
+<div class="grid">
+  <div class="card half hero">
+    <span class="k"><i></i>Early-access requests</span>
+    <div class="v" id="signups">—</div>
+    <p class="sub" id="signupsNote">Loading ledger…</p>
+    <div class="rowl"><span class="chip ok" id="captureChip">form capture: LIVE → info@kestrelinvest.xyz</span></div>
+  </div>
+
+  <div class="card half">
+    <span class="k"><i></i>$KESTREL · live from Jupiter</span>
+    <div class="v" id="price">—</div>
+    <p class="sub">price · auto-refreshes every 60s</p>
+    <div class="rowl">
+      <span class="chip" id="mcap">mcap —</span>
+      <span class="chip" id="liq">liquidity —</span>
+      <span class="chip" id="holders" hidden>holders —</span>
+      <button class="ca" id="caBtn" title="Copy contract address">CA: G9ALRz…ECVQpump ⧉</button>
+    </div>
+  </div>
+
+  <div class="card"><span class="k"><i></i>Portfolios</span><div class="v">4</div><p class="sub">Roost · Perch · Soar · Apex — published targets are the ground truth</p></div>
+  <div class="card"><span class="k"><i></i>Verified universe</span><div class="v">16<small> mints</small></div><p class="sub">Q-1 pass 2026-08-20 — real tokenized assets, round-trip cost measured per mint</p></div>
+  <div class="card"><span class="k"><i></i>Paper engine</span><div class="v">M0<small> · live</small></div><p class="sub">4 vaults · $10k each · drift-band 3pp · 20h cooldown · measured friction</p></div>
+
+  <div class="card wide">
+    <span class="k"><i></i>Site health — kestrelinvest.xyz</span>
+    <div class="rowl" id="pages">checking…</div>
+    <p class="sub" style="margin-top:12px">Checks run live from this page against production. Green = HTTP 200.</p>
+  </div>
+</div>
+
+<p class="foot">
+  <span>Every number on this page is real: the signup count reads <a href="data/signups.json">data/signups.json</a> (updated from the info@ inbox), token metrics stream from Jupiter, health checks hit production live.</span>
+  <span>Unlisted page · noindex</span>
+</p>
+</div>
+
+<script>
+(function(){
+  var MINT="G9ALRz5jtq6wG7dijjsb1TvkGatwPNcnhbAGECVQpump";
+  var $=function(id){return document.getElementById(id)};
+  function fmt(n,d){return n>=1e6?(n/1e6).toFixed(1)+"M":n>=1e3?(n/1e3).toFixed(1)+"k":Number(n).toFixed(d==null?2:d)}
+  function countUp(el,to,dec,pre){var t0=performance.now(),dur=900;function f(t){var p=Math.min(1,(t-t0)/dur);p=1-Math.pow(1-p,3);el.textContent=(pre||"")+Number(to*p).toFixed(dec);if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+
+  // 1. signup ledger (repo-committed truth)
+  fetch("data/signups.json",{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){
+    countUp($("signups"), j.confirmed_signups, 0);
+    $("signupsNote").innerHTML="as of <b>"+j.as_of+"</b> · counted from confirmed requests in the info@ inbox";
+  }).catch(function(){$("signups").textContent="?";$("signupsNote").textContent="ledger unreadable"});
+
+  // 2. live token metrics
+  function token(){
+    fetch("https://lite-api.jup.ag/tokens/v2/search?query="+MINT).then(function(r){return r.json()}).then(function(d){
+      var t=(d||[]).find(function(x){return x.id===MINT}); if(!t) throw 0;
+      var px=t.usdPrice||t.price||0;
+      $("price").textContent="$"+(px<0.01?Number(px).toExponential(2):Number(px).toFixed(4));
+      $("mcap").textContent="mcap $"+fmt(t.mcap||t.fdv||0);
+      $("liq").textContent="liquidity $"+fmt(t.liquidity||0);
+      if(t.holderCount){$("holders").hidden=false;$("holders").textContent="holders "+t.holderCount}
+      $("upd").textContent="updated "+new Date().toLocaleTimeString();
+    }).catch(function(){$("upd").textContent="token feed unavailable — retrying"});
+  }
+  token(); setInterval(token,60000);
+
+  // 3. site health
+  var PAGES=["index.html","portfolios.html","whitepaper.html","prospectus.html","contact.html","x402.html"];
+  var wrap=$("pages"); wrap.textContent="";
+  PAGES.forEach(function(p){
+    var c=document.createElement("span"); c.className="chip"; c.textContent=p+" …"; wrap.appendChild(c);
+    fetch("/"+p,{method:"HEAD",cache:"no-store"}).then(function(r){
+      c.className="chip "+(r.ok?"ok":"err"); c.textContent=p+(r.ok?" · 200":" · "+r.status);
+    }).catch(function(){c.className="chip err";c.textContent=p+" · unreachable"});
+  });
+
+  // CA copy
+  $("caBtn").addEventListener("click",function(){
+    if(navigator.clipboard)navigator.clipboard.writeText(MINT);
+    var b=this;b.textContent="Copied ✓";setTimeout(function(){b.textContent="CA: G9ALRz…ECVQpump ⧉"},1500);
+  });
+})();
+</script>
+</body>
+</html>

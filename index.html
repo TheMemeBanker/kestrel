@@ -864,7 +864,7 @@
   Array.prototype.forEach.call(navLinks.querySelectorAll("a"), function(a){ a.addEventListener("click", function(e){ if(a.getAttribute("href")==="#"){ e.preventDefault(); } closeNav(); }); });
 
   /* ---------- early-access waitlist ---------- */
-  var EA_ENDPOINT=""; // TODO: set to the form endpoint once chosen (Formspree/etc.) to capture signups server-side
+  var EA_ENDPOINT = "https://formsubmit.co/ajax/info@kestrelinvest.xyz"; // TODO: set to the form endpoint once chosen (Formspree/etc.) to capture signups server-side
   var overlay=$("eaOverlay"), formView=$("eaFormView"), doneView=$("eaDoneView");
   var eaForm=$("eaForm"), eaWallet=$("eaWallet"), eaEmail=$("eaEmail"), eaWErr=$("eaWalletErr"), eaEErr=$("eaEmailErr"), eaSubmit=$("eaSubmit");
   var lastFocus=null, emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
