@@ -350,6 +350,20 @@
     .srow{flex:0 0 auto;min-width:176px}
   }
   @media (prefers-reduced-motion: reduce) { .halo,.abar.pulse,.live i,.rise { animation: none !important; } .abar > span { transition: none; } .rise { opacity:1; transform:none; } html { scroll-behavior: auto; } }
+
+  /* live paper portfolios */
+  #live .lp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+  @media(max-width:820px){#live .lp-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:480px){#live .lp-grid{grid-template-columns:1fr}}
+  .lp-card{background:var(--surface);border:1px solid var(--card-line);border-radius:16px;padding:20px 18px}
+  .lp-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .lp-name{font-weight:700;font-size:17px}
+  .lp-tier{font:600 10px/1 ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#8ea99b;border:1px solid var(--line);border-radius:6px;padding:4px 7px}
+  .lp-nav{font-size:30px;font-weight:750;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .lp-ret{margin-top:4px;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums;color:#8ea99b}
+  .lp-ret.up{color:var(--accent)}.lp-ret.down{color:#ff6b6b}
+  .lp-since{margin-top:10px;font-size:11px;color:#8ea99b}
+  .lp-note{margin-top:18px;font-size:12px;color:#8ea99b;max-width:640px}
 </style>
 <link rel="stylesheet" href="elevate.css">
 
@@ -531,6 +545,22 @@
         <p>Your keys, always. Kestrel can rebalance between your holdings but never withdraw to itself.</p>
       </div>
     </div>
+  </section>
+
+  <!-- LIVE PAPER PORTFOLIOS -->
+  <section class="sec" id="live">
+    <div class="sec-head rise">
+      <p class="eyebrow">Live · real prices</p>
+      <h2>Not a backtest. Our portfolios, tracked live.</h2>
+      <p>Four paper portfolios, seeded at $10,000 each on Aug 20, 2026, marked in real time against live tokenized-equity prices on Solana. Same drift-band engine, same published weights — watch the risk ladder do exactly what it says.</p>
+    </div>
+    <div class="lp-grid">
+      <div class="lp-card rise" data-vault="Roost"><div class="lp-top"><span class="lp-name">Roost</span><span class="lp-tier">Conservative</span></div><div class="lp-nav" data-nav>—</div><div class="lp-ret" data-ret>tracking…</div><div class="lp-since">since Aug 20, 2026 · $10,000 start</div></div>
+      <div class="lp-card rise" data-vault="Perch"><div class="lp-top"><span class="lp-name">Perch</span><span class="lp-tier">Moderate</span></div><div class="lp-nav" data-nav>—</div><div class="lp-ret" data-ret>tracking…</div><div class="lp-since">since Aug 20, 2026 · $10,000 start</div></div>
+      <div class="lp-card rise" data-vault="Soar"><div class="lp-top"><span class="lp-name">Soar</span><span class="lp-tier">Growth</span></div><div class="lp-nav" data-nav>—</div><div class="lp-ret" data-ret>tracking…</div><div class="lp-since">since Aug 20, 2026 · $10,000 start</div></div>
+      <div class="lp-card rise" data-vault="Apex"><div class="lp-top"><span class="lp-name">Apex</span><span class="lp-tier">Aggressive</span></div><div class="lp-nav" data-nav>—</div><div class="lp-ret" data-ret>tracking…</div><div class="lp-since">since Aug 20, 2026 · $10,000 start</div></div>
+    </div>
+    <p class="lp-note">Illustrative paper portfolios — real live prices, <strong>not real money and not a live product</strong>. Kestrel is in development. Nothing here is an offer, advice, or a projection of returns.</p>
   </section>
 
   <section class="sec" id="token">
@@ -923,5 +953,29 @@
 </script>
 <script src="elevate.js" defer></script>
 
+
+<script>
+(function(){
+  var UNITS={"Roost": {"USDC": 5000, "AAPL": 3.1565, "SPY": 5.2081}, "Perch": {"USDC": 2500, "SILV": 3.0221, "GLD": 0.7215, "AAPL": 3.1565, "MSFT": 2.0745, "QQQ": 2.0996, "SPY": 4.5571}, "Soar": {"USDC": 1000, "SILV": 3.0221, "GLD": 0.7215, "META": 1.8299, "HOOD": 10.1991, "AMZN": 4.5803, "MSFT": 2.6969, "QQQ": 2.7995, "NVDA": 9.1657}, "Apex": {"USDC": 0.0, "SILV": 6.7157, "GLD": 1.6033, "MU": 0.8087, "COIN": 5.1223, "TSLA": 2.9425, "MSTR": 9.9246, "HOOD": 13.5988, "SPCX": 13.3526, "NVDA": 9.1657}}, MINTS={"SPY": "XsoCS1TfEyfFhfvj8EtZ528L3CaKBDBRqRapnBbDF2W", "AAPL": "XsbEhLAtcf6HdfpFZ5xEMdqW8nfAvcsP5bdudRLJzJp", "QQQ": "Xs8S1uUs1zvS2p7iwtsG3b6fkhpvmwz4GYU3gWAmWHZ", "MSFT": "XspzcW1PRtgf6Wj92HCiZdjzKCyFekVD8P5Ueh3dRMX", "GLD": "Xsv9hRk1z5ystj9MhnA7Lq4vjSsLwzL2nxrwmwtD3re", "AMZN": "Xs3eBt7uRfJX8QUs4suhyU8p2M6DoUDrJyWBa8LLZsg", "NVDA": "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh", "META": "Xsa62P5mvPszXL1krVUnU5ar38bBSVcWAB6fmPCo5Zu", "HOOD": "XsvNBAYkrDRNhA7wPHQfX3ZUXZyZLdnCQDfHZ56bzpg", "TSLA": "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB", "MU": "MUxEsUKSMACyw5fZf68wxf5FLnZVhtU9CwH8uNNGay1", "SPCX": "SPCXxcqXj6e5dJDVNovHN8744zkbhM2bYudU45BimGb", "MSTR": "MSTRdWXMeZxdE8osAQy3fA4rvTY5rgummDSMEx6U7Nz", "COIN": "Xs7ZdzSHLU9ftNJsii5fCeJhoRWSC32SQGzGQtePxNu", "SILV": "SiLVFMgD3eD2rgK628NbTBq9MnuJF5FW2CRaVyTB35L"};
+  var mints=Object.values(MINTS);
+  fetch("https://lite-api.jup.ag/price/v3?ids="+mints.join(","))
+    .then(function(r){if(!r.ok)throw 0;return r.json()})
+    .then(function(px){
+      var price={USDC:1};
+      for(var t in MINTS){var row=px[MINTS[t]];var p=row&&(row.usdPrice||row.price);if(p>0)price[t]=Number(p);}
+      document.querySelectorAll("#live .lp-card").forEach(function(card){
+        var v=card.getAttribute("data-vault");var u=UNITS[v];var nav=0,ok=true;
+        for(var t in u){if(price[t]==null){ok=false;break;}nav+=u[t]*price[t];}
+        if(!ok)return;
+        var ret=(nav/10000-1)*100;
+        card.querySelector("[data-nav]").textContent="$"+nav.toLocaleString(undefined,{maximumFractionDigits:0});
+        var re=card.querySelector("[data-ret]");
+        re.textContent=(ret>=0?"+":"")+ret.toFixed(2)+"% since inception";
+        re.className="lp-ret "+(ret>=0?"up":"down");
+      });
+    })
+    .catch(function(){});
+})();
+</script>
 </body>
 </html>
